@@ -1,0 +1,18 @@
+{
+  "name" : "bibi",
+  "version-string" : "1.0.0",
+  "builtin-baseline" : "2ddc10c8afa00a762a69f21f6427849fe906ede0",
+  "dependencies" : [ {
+    "name" : "vcpkg-cmake-config",
+    "version>=" : "2024-05-23"
+  }, {
+    "name" : "vcpkg-cmake",
+    "version>=" : "2024-04-23"
+  }, {
+    "name" : "glfw3",
+    "version>=" : "3.4"
+  }, {
+    "name" : "glad",
+    "version>=" : "0.1.36"
+  } ]
+}
