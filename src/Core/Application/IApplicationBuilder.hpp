@@ -8,6 +8,7 @@
 #include <string>
 
 #include "Application.hpp"
+#include "Module/IModule.hpp"
 
 namespace Bibi::Core::Application {
 
@@ -15,6 +16,7 @@ namespace Bibi::Core::Application {
     public:
         virtual IApplicationBuilder& setDimensions(int width, int height) = 0;
         virtual IApplicationBuilder& setTitle(std::string title) = 0;
+        virtual IApplicationBuilder& addModule(std::unique_ptr<Module::IModule> module) = 0;
         virtual Application build() = 0;
     };
 

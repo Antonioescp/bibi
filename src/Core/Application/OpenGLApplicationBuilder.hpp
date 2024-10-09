@@ -17,11 +17,13 @@ namespace Bibi::Core::Application {
         IApplicationBuilder& setDimensions(int width, int height) override;
         IApplicationBuilder& setTitle(std::string title) override;
         Application build() override;
+        IApplicationBuilder& addModule(std::unique_ptr<Module::IModule> module) override;
 
     private:
         int _width{ 640 };
         int _height{ 480 };
         std::string _title{ "Application" };
+        std::vector<std::unique_ptr<Bibi::Module::IModule>> _modules;
     };
 
 } // Application

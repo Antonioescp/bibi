@@ -45,6 +45,22 @@ namespace Bibi::Core::Application {
 
         glViewport(0, 0, _width, _height);
 
-        return Application(window);
+        Application app{ window };
+
+        for (auto& module: _modules) {
+            module->setUp();
+            app.addModule(std::move(module));
+        }
+
+        _modules.clear();
+
+        return app;
     }
+
+    IApplicationBuilder& OpenGLApplicationBuilder::addModule(std::unique_ptr<Module::IModule> module) {
+        _modules.push_back(std::move(module));
+
+        return *this;
+    }
+
 } // Application

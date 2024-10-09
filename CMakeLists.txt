@@ -9,10 +9,26 @@ add_executable(bibi main.cpp
         src/Core/Application/IApplicationBuilder.hpp
         src/Core/Application/OpenGLApplicationBuilder.cpp
         src/Core/Application/OpenGLApplicationBuilder.hpp
+        src/Module/IModule.hpp
+        src/Module/ImGuiModule.cpp
+        src/Module/ImGuiModule.hpp
+        src/Module/Logging/LogModule.cpp
+        src/Module/Logging/LogModule.hpp
+        src/Module/Logging/Logger.cpp
+        src/Module/Logging/Logger.hpp
+        src/Module/Logging/ILogger.hpp
 )
+
+target_include_directories(bibi PRIVATE src)
 
 find_package(glad CONFIG REQUIRED)
 target_link_libraries(bibi PRIVATE glad::glad)
 
 find_package(glfw3 CONFIG REQUIRED)
 target_link_libraries(bibi PRIVATE glfw)
+
+find_package(imgui CONFIG REQUIRED)
+target_link_libraries(bibi PRIVATE imgui::imgui)
+
+find_package(spdlog CONFIG REQUIRED)
+target_link_libraries(bibi PRIVATE spdlog::spdlog)
