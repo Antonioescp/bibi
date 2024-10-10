@@ -14,9 +14,11 @@ namespace Bibi::Module::Logging {
 
     class Logger {
     public:
+        Logger() = delete;
+
         static void initialize();
         static std::shared_ptr<spdlog::logger> createDailyFileLogger(const std::string& name);
-        static std::shared_ptr<spdlog::logger> getLogger(const std::string& name);
+        static std::shared_ptr<spdlog::logger> get(const std::string& name);
 
     private:
         static const std::string _coreLogName;

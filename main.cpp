@@ -1,19 +1,21 @@
 #include <iostream>
 
-#include "src/Core/Application/OpenGLApplicationBuilder.hpp"
-#include "src/Core/Application/Application.hpp"
-#include "Module/ImGuiModule.hpp"
-#include "Module/Logging/LogModule.hpp"
+#include "Core/OpenGLApplicationBuilder.hpp"
+#include "Core/Application.hpp"
+#include "Module/ImGui/ImGuiModule.hpp"
+#include "Module/Logging/LoggerModule.hpp"
 
-using namespace Bibi::Core::Application;
+using namespace Bibi::Core;
+using namespace Bibi::Module;
 
 int main() {
     OpenGLApplicationBuilder appBuilder{};
+
     appBuilder
             .setDimensions(1920, 1080)
             .setTitle("Bibi Engine")
-            .addModule(std::make_unique<Bibi::Module::Logging::LogModule>())
-            .addModule(std::make_unique<Bibi::Module::ImGuiModule>());
+            .addModule(std::make_unique<Logging::LoggerModule>())
+            .addModule(std::make_unique<Gui::ImGuiModule>());
 
     auto app{ appBuilder.build() };
     app.run();

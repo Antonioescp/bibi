@@ -2,19 +2,11 @@
 // Created by packa on 9/10/2024.
 //
 
-#include "LogModule.hpp"
+#include "LoggerModule.hpp"
 #include "Logger.hpp"
 
 namespace Bibi::Module::Logging {
-    void LogModule::setUp() {
+    void LoggerModule::setUp(GLFWwindow* window) {
         Logger::initialize();
-    }
-
-    void LogModule::tearDown() {
-
-    }
-
-    void LogModule::run() {
-
     }
 } // Logging

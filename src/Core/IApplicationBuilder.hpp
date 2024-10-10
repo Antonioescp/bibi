@@ -10,7 +10,7 @@
 #include "Application.hpp"
 #include "Module/IModule.hpp"
 
-namespace Bibi::Core::Application {
+namespace Bibi::Core {
 
     class IApplicationBuilder {
     public:

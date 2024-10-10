@@ -9,15 +9,18 @@
 #include <GLFW/glfw3.h>
 
 #include "IApplicationBuilder.hpp"
+#include "Module/IModuleConfigurable.hpp"
+#include "Module/IModuleDeconstructable.hpp"
+#include "Module/IModuleRunnable.hpp"
 
-namespace Bibi::Core::Application {
+namespace Bibi::Core {
 
     class OpenGLApplicationBuilder : public IApplicationBuilder {
     public:
         IApplicationBuilder& setDimensions(int width, int height) override;
         IApplicationBuilder& setTitle(std::string title) override;
-        Application build() override;
         IApplicationBuilder& addModule(std::unique_ptr<Module::IModule> module) override;
+        Application build() override;
 
     private:
         int _width{ 640 };

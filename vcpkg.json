@@ -19,7 +19,8 @@
     "version>=" : "5.4.3"
   }, {
     "name" : "imgui",
-    "version>=" : "1.91.0"
+    "version>=" : "1.91.0",
+    "features": ["glfw-binding", "opengl3-binding"]
   }, {
     "name" : "spdlog",
     "version>=" : "1.14.1"

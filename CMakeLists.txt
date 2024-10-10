@@ -4,19 +4,21 @@ project(bibi)
 set(CMAKE_CXX_STANDARD 26)
 
 add_executable(bibi main.cpp
-        src/Core/Application/Application.cpp
-        src/Core/Application/Application.hpp
-        src/Core/Application/IApplicationBuilder.hpp
-        src/Core/Application/OpenGLApplicationBuilder.cpp
-        src/Core/Application/OpenGLApplicationBuilder.hpp
+        src/Core/Application.cpp
+        src/Core/Application.hpp
+        src/Core/IApplicationBuilder.hpp
+        src/Core/OpenGLApplicationBuilder.cpp
+        src/Core/OpenGLApplicationBuilder.hpp
+        src/Module/IModuleConfigurable.hpp
         src/Module/IModule.hpp
-        src/Module/ImGuiModule.cpp
-        src/Module/ImGuiModule.hpp
-        src/Module/Logging/LogModule.cpp
-        src/Module/Logging/LogModule.hpp
+        src/Module/ImGui/ImGuiModule.cpp
+        src/Module/ImGui/ImGuiModule.hpp
+        src/Module/Logging/LoggerModule.cpp
+        src/Module/Logging/LoggerModule.hpp
         src/Module/Logging/Logger.cpp
         src/Module/Logging/Logger.hpp
-        src/Module/Logging/ILogger.hpp
+        src/Module/IModuleDeconstructable.hpp
+        src/Module/IModuleRunnable.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

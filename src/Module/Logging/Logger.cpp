@@ -59,14 +59,14 @@ namespace Bibi::Module::Logging {
         }
     }
 
-    std::shared_ptr<spdlog::logger> Logger::getLogger(const std::string &name) {
+    std::shared_ptr<spdlog::logger> Logger::get(const std::string &name) {
         auto existingLogger{spdlog::get(name)};
         return existingLogger ? existingLogger : createDailyFileLogger(name);
     }
 
     std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> Logger::createConsoleSink(const std::string &name) {
         auto consoleSink{std::make_shared<spdlog::sinks::stdout_color_sink_mt>()};
-        consoleSink->set_level(spdlog::level::trace);
+        consoleSink->set_level(spdlog::level::debug);
         consoleSink->set_pattern(_pattern);
 
         return consoleSink;
@@ -74,7 +74,7 @@ namespace Bibi::Module::Logging {
 
     std::shared_ptr<spdlog::sinks::daily_file_sink_mt> Logger::createDailyFileSink(const std::string &name) {
         auto dailySink{std::make_shared<spdlog::sinks::daily_file_sink_mt>(name + ".log", 23, 59)};
-        dailySink->set_level(spdlog::level::trace);
+        dailySink->set_level(spdlog::level::debug);
         dailySink->set_pattern(_pattern);
 
         return dailySink;
