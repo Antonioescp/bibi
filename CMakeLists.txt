@@ -37,3 +37,10 @@ target_link_libraries(bibi PRIVATE imgui::imgui)
 
 find_package(spdlog CONFIG REQUIRED)
 target_link_libraries(bibi PRIVATE spdlog::spdlog)
+
+# Define the source directory and the destination directory (bin dir)
+set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/data")
+set(DEST_DIR "${CMAKE_BINARY_DIR}")
+
+# Copy the directory from source to bin
+file(COPY ${SOURCE_DIR} DESTINATION ${DEST_DIR})
