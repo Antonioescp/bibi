@@ -7,11 +7,13 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "IElement.hpp"
-#include "MenuBarElement.hpp"
+#include "Module/Gui/Elements/MenuBarElement.hpp"
 
 using namespace Bibi::Module::Logging;
 
 namespace Bibi::Module::Gui {
+    const std::string ImGuiModule::name = "imgui";
+
     void ImGuiModule::setUp(GLFWwindow* window) {
         initializeImGui(window);
         registerElements(window);
@@ -51,7 +53,7 @@ namespace Bibi::Module::Gui {
     }
 
     void ImGuiModule::initializeImGui(GLFWwindow *window) {
-        _logger = Logger::get("imgui");
+        _logger = Logger::get(ImGuiModule::name);
         _logger->info("Setting up imgui");
 
         _logger->info("Checking imgui version");
@@ -74,7 +76,6 @@ namespace Bibi::Module::Gui {
     }
 
     void ImGuiModule::registerElements(GLFWwindow *window) {
-
         _logger->info("Registering elements");
         _logger->info("Registering menu bar element");
         auto menuBar = std::make_unique<MenuBarElement>();

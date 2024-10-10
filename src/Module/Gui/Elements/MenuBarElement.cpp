@@ -7,7 +7,7 @@
 
 #include "MenuBarElement.hpp"
 
-namespace Bibi::Module::Gui {
+namespace Bibi::Module::Gui:: inline Elements {
     void MenuBarElement::render(GLFWwindow* window) {
         if (ImGui::BeginMainMenuBar()) {
             if (ImGui::BeginMenu("File")) {

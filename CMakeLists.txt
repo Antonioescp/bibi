@@ -20,8 +20,8 @@ add_executable(bibi main.cpp
         src/Module/IModuleDeconstructable.hpp
         src/Module/IModuleRunnable.hpp
         src/Module/Gui/IElement.hpp
-        src/Module/Gui/MenuBarElement.cpp
-        src/Module/Gui/MenuBarElement.hpp
+        src/Module/Gui/Elements/MenuBarElement.cpp
+        src/Module/Gui/Elements/MenuBarElement.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

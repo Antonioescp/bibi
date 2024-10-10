@@ -7,7 +7,7 @@
 
 #include "Module/Gui/IElement.hpp"
 
-namespace Bibi::Module::Gui {
+namespace Bibi::Module::Gui:: inline Elements {
 
     class MenuBarElement : public IElement {
     public:

@@ -10,7 +10,7 @@
 
 namespace Bibi::Module::Logging {
 
-    class LoggerModule : public IModuleConfigurable  {
+    class LoggerModule : public IModuleConfigurable {
     public:
         void setUp(GLFWwindow* window) override;
     };

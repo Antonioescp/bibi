@@ -5,6 +5,7 @@
 #ifndef BIBI_IMGUIMODULE_HPP
 #define BIBI_IMGUIMODULE_HPP
 
+#include <string>
 #include <spdlog/logger.h>
 #include "Module/Logging/Logger.hpp"
 #include "Module/IModuleConfigurable.hpp"
@@ -16,6 +17,8 @@ namespace Bibi::Module::Gui {
 
     class ImGuiModule : public IModuleConfigurable, public IModuleRunnable, public IModuleDeconstructable {
     public:
+        static const std::string name;
+
         void setUp(GLFWwindow* window) override;
         void run(GLFWwindow* window) override;
         void tearDown(GLFWwindow* window) override;
