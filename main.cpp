@@ -2,7 +2,7 @@
 
 #include "Core/OpenGLApplicationBuilder.hpp"
 #include "Core/Application.hpp"
-#include "Module/ImGui/ImGuiModule.hpp"
+#include "Module/Gui/ImGuiModule.hpp"
 #include "Module/Logging/LoggerModule.hpp"
 
 using namespace Bibi::Core;

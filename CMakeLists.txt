@@ -11,14 +11,17 @@ add_executable(bibi main.cpp
         src/Core/OpenGLApplicationBuilder.hpp
         src/Module/IModuleConfigurable.hpp
         src/Module/IModule.hpp
-        src/Module/ImGui/ImGuiModule.cpp
-        src/Module/ImGui/ImGuiModule.hpp
+        src/Module/Gui/ImGuiModule.cpp
+        src/Module/Gui/ImGuiModule.hpp
         src/Module/Logging/LoggerModule.cpp
         src/Module/Logging/LoggerModule.hpp
         src/Module/Logging/Logger.cpp
         src/Module/Logging/Logger.hpp
         src/Module/IModuleDeconstructable.hpp
         src/Module/IModuleRunnable.hpp
+        src/Module/Gui/IElement.hpp
+        src/Module/Gui/MenuBarElement.cpp
+        src/Module/Gui/MenuBarElement.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

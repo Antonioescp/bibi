@@ -10,6 +10,7 @@
 #include "Module/IModuleConfigurable.hpp"
 #include "Module/IModuleDeconstructable.hpp"
 #include "Module/IModuleRunnable.hpp"
+#include "Module/Gui/IElement.hpp"
 
 namespace Bibi::Module::Gui {
 
@@ -18,9 +19,14 @@ namespace Bibi::Module::Gui {
         void setUp(GLFWwindow* window) override;
         void run(GLFWwindow* window) override;
         void tearDown(GLFWwindow* window) override;
+        void addElement(std::unique_ptr<IElement> element);
 
     private:
         std::shared_ptr<spdlog::logger> _logger;
+        std::vector<std::unique_ptr<IElement>> _elements;
+
+        void initializeImGui(GLFWwindow* window);
+        void registerElements(GLFWwindow* window);
     };
 
 } // Module
