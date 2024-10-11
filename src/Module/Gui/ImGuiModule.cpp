@@ -8,6 +8,8 @@
 #include "imgui_impl_opengl3.h"
 #include "IElement.hpp"
 #include "Module/Gui/Elements/MenuBarElement.hpp"
+#include "Module/Gui/Elements/SomeWindow.hpp"
+#include "Core/Events/Function.hpp"
 
 using namespace Bibi::Module::Logging;
 
@@ -17,6 +19,10 @@ namespace Bibi::Module::Gui {
     void ImGuiModule::setUp(GLFWwindow* window) {
         initializeImGui(window);
         registerElements(window);
+
+        for (auto& element : _elements) {
+            element->setUp();
+        }
     }
 
     void ImGuiModule::run(GLFWwindow *window) {
@@ -25,7 +31,7 @@ namespace Bibi::Module::Gui {
         ImGui::NewFrame();
 
         for (auto& element : _elements) {
-            element->render(window);
+            element->render();
         }
 
         ImGui::Render();
@@ -34,17 +40,9 @@ namespace Bibi::Module::Gui {
 
     void ImGuiModule::tearDown(GLFWwindow* window) {
         _logger->info("Tearing down imgui");
-        _logger->info("Shutting down platform and renderer bindings");
-
-        _logger->info("Shutting down opengl3 implementation");
         ImGui_ImplOpenGL3_Shutdown();
-
-        _logger->info("Shutting down glfw implementation");
         ImGui_ImplGlfw_Shutdown();
-
-        _logger->info("Destroying context");
         ImGui::DestroyContext();
-
         _logger->info("imgui teardown complete");
     }
 
@@ -56,19 +54,12 @@ namespace Bibi::Module::Gui {
         _logger = Logger::get(ImGuiModule::name);
         _logger->info("Setting up imgui");
 
-        _logger->info("Checking imgui version");
         IMGUI_CHECKVERSION();
-
-        _logger->info("Creating context");
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO();
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-
-        _logger->info("Setting up style");
         ImGui::StyleColorsDark();
-
-        _logger->info("Setting up platform and renderer bindings");
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 150");
 
@@ -76,9 +67,15 @@ namespace Bibi::Module::Gui {
     }
 
     void ImGuiModule::registerElements(GLFWwindow *window) {
-        _logger->info("Registering elements");
-        _logger->info("Registering menu bar element");
-        auto menuBar = std::make_unique<MenuBarElement>();
+        auto someWindow = std::make_unique<SomeWindow>(window);
+        auto menuBar = std::make_unique<MenuBarElement>(window);
+
+        using namespace Core::Events;
+        menuBar->getToggleWindowEvent().subscribe([target = someWindow.get()]{
+            target->toggle();
+        });
+
+        this->addElement(std::move(someWindow));
         this->addElement(std::move(menuBar));
     }
 } // Module

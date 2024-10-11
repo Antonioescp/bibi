@@ -22,6 +22,15 @@ add_executable(bibi main.cpp
         src/Module/Gui/IElement.hpp
         src/Module/Gui/Elements/MenuBarElement.cpp
         src/Module/Gui/Elements/MenuBarElement.hpp
+        src/Core/Events/Event.hpp
+        src/Core/Events/IEventSubscriber.hpp
+        src/Core/Events/IEventPublisher.hpp
+        src/Core/Events/IEvent.hpp
+        src/Core/Exceptions/Exception.cpp
+        src/Core/Exceptions/Exception.hpp
+        src/Module/Gui/Elements/SomeWindow.cpp
+        src/Module/Gui/Elements/SomeWindow.hpp
+        src/Core/Events/Function.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

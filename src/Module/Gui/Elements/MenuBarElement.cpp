@@ -7,16 +7,29 @@
 
 #include "MenuBarElement.hpp"
 
-namespace Bibi::Module::Gui:: inline Elements {
-    void MenuBarElement::render(GLFWwindow* window) {
-        if (ImGui::BeginMainMenuBar()) {
-            if (ImGui::BeginMenu("File")) {
-                if (ImGui::MenuItem("Exit")) {
-                    glfwSetWindowShouldClose(window, GLFW_TRUE);
-                }
-                ImGui::EndMenu();
+namespace Bibi::Module::Gui::
+inline Elements {
+
+void MenuBarElement::render() {
+    if (ImGui::BeginMainMenuBar()) {
+        if (ImGui::BeginMenu("File")) {
+            if (ImGui::MenuItem("Toggle Window")) {
+                _toggleWindowEvent.trigger();
             }
-            ImGui::EndMainMenuBar();
+            if (ImGui::MenuItem("Exit")) {
+                glfwSetWindowShouldClose(_window, GLFW_TRUE);
+            }
+            ImGui::EndMenu();
         }
+        ImGui::EndMainMenuBar();
     }
+}
+
+void MenuBarElement::setUp() {
+}
+
+Core::Events::IEventSubscriber<> &MenuBarElement::getToggleWindowEvent() {
+    return _toggleWindowEvent;
+}
+
 } // Gui

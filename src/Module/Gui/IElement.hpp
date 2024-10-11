@@ -5,12 +5,19 @@
 #ifndef BIBI_IELEMENT_HPP
 #define BIBI_IELEMENT_HPP
 
+#include <GLFW/glfw3.h>
+
 namespace Bibi::Module::Gui {
 
     class IElement {
     public:
+        explicit IElement(GLFWwindow* window) : _window{window} {};
         virtual ~IElement() = default;
-        virtual void render(GLFWwindow* window) = 0;
+        virtual void render() = 0;
+        virtual void setUp() = 0;
+
+    protected:
+        GLFWwindow* _window;
     };
 
 } // Module
