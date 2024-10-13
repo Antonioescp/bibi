@@ -41,7 +41,6 @@ namespace Bibi::Core {
         while (!glfwWindowShouldClose(_mainWindow)) {
             glfwPollEvents();
             glClear(GL_COLOR_BUFFER_BIT);
-
             for (auto& module : _runnableModules) {
                 module->run(_mainWindow);
             }

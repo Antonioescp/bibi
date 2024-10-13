@@ -6,6 +6,7 @@
 #define BIBI_IMGUIMODULE_HPP
 
 #include <string>
+#include <span>
 #include <spdlog/logger.h>
 #include "Module/Logging/Logger.hpp"
 #include "Module/IModuleConfigurable.hpp"
@@ -22,14 +23,28 @@ namespace Bibi::Module::Gui {
         void setUp(GLFWwindow* window) override;
         void run(GLFWwindow* window) override;
         void tearDown(GLFWwindow* window) override;
-        void addElement(std::unique_ptr<IElement> element);
+        static void addElement(std::unique_ptr<IElement> element);
+        static auto getElements();
+
+        template <typename TElement>
+        requires std::derived_from<TElement, IElement>
+        static TElement* getElementByTag(const std::string& tag) {
+            for (auto& element : s_elements) {
+                auto found{ element->getChildByTag(tag) };
+                if (found) {
+                    return dynamic_cast<TElement*>(found);
+                }
+            }
+
+            return {};
+        }
 
     private:
         std::shared_ptr<spdlog::logger> _logger;
-        std::vector<std::unique_ptr<IElement>> _elements;
+        static std::vector<std::unique_ptr<IElement>> s_elements;
 
         void initializeImGui(GLFWwindow* window);
-        void registerElements(GLFWwindow* window);
+        static void registerElements(GLFWwindow* window);
     };
 
 } // Module

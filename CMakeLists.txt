@@ -20,17 +20,31 @@ add_executable(bibi main.cpp
         src/Module/IModuleDeconstructable.hpp
         src/Module/IModuleRunnable.hpp
         src/Module/Gui/IElement.hpp
-        src/Module/Gui/Elements/MenuBarElement.cpp
-        src/Module/Gui/Elements/MenuBarElement.hpp
+        src/Module/Gui/Elements/MainMenuBarElement.cpp
+        src/Module/Gui/Elements/MainMenuBarElement.hpp
         src/Core/Events/Event.hpp
         src/Core/Events/IEventSubscriber.hpp
         src/Core/Events/IEventPublisher.hpp
         src/Core/Events/IEvent.hpp
         src/Core/Exceptions/Exception.cpp
         src/Core/Exceptions/Exception.hpp
-        src/Module/Gui/Elements/SomeWindow.cpp
-        src/Module/Gui/Elements/SomeWindow.hpp
         src/Core/Events/Function.hpp
+        src/Module/Gui/Element.cpp
+        src/Module/Gui/Element.hpp
+        src/Module/Gui/Elements/MenuElement.cpp
+        src/Module/Gui/Elements/MenuElement.hpp
+        src/Module/Gui/Elements/MenuItemElement.cpp
+        src/Module/Gui/Elements/MenuItemElement.hpp
+        src/Module/Gui/Elements/WindowElement.cpp
+        src/Module/Gui/Elements/WindowElement.hpp
+        src/Core/UI/BibiMainMenuElement.cpp
+        src/Core/UI/BibiMainMenuElement.hpp
+        src/Core/UI/ElementTag.cpp
+        src/Core/UI/ElementTag.hpp
+        src/Core/UI/BibiAboutWindowElement.cpp
+        src/Core/UI/BibiAboutWindowElement.hpp
+        src/Module/Gui/Elements/TextElement.cpp
+        src/Module/Gui/Elements/TextElement.hpp
 )
 
 target_include_directories(bibi PRIVATE src)
