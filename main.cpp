@@ -1,13 +1,11 @@
-#include <iostream>
-
 #include "Core/OpenGLApplicationBuilder.hpp"
 #include "Core/Application.hpp"
-#include "Module/Gui/ImGuiModule.hpp"
-#include "Module/Logging/LoggerModule.hpp"
+#include "Modules/Gui/ImGuiModule.hpp"
+#include "Modules/Logging/LoggerModule.hpp"
 #include "Core/Exceptions/Exception.hpp"
 
 using namespace Bibi::Core;
-using namespace Bibi::Module;
+using namespace Bibi::Modules;
 using namespace Exceptions;
 
 int main() {

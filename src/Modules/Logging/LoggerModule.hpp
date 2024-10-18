@@ -5,14 +5,14 @@
 #ifndef BIBI_LOGGERMODULE_HPP
 #define BIBI_LOGGERMODULE_HPP
 
-#include "Module/IModuleConfigurable.hpp"
-#include "Module/IModuleDeconstructable.hpp"
+#include "Modules/IModuleConfigurable.hpp"
+#include "Modules/IModuleDeconstructable.hpp"
 
-namespace Bibi::Module::Logging {
+namespace Bibi::Modules::Logging {
 
     class LoggerModule : public IModuleConfigurable {
     public:
-        void setUp(GLFWwindow* window) override;
+        void setUp() override;
     };
 
 } // Logging

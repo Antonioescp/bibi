@@ -8,9 +8,12 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include <GLFW/glfw3.h>
 
-namespace Bibi::Module::Gui {
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include "Core/Application.hpp"
+
+namespace Bibi::Modules::Gui {
     class IElement {
     public:
         virtual ~IElement() = default;
@@ -25,10 +28,10 @@ namespace Bibi::Module::Gui {
         virtual std::string getTag() = 0;
         virtual void setParent(IElement* parent) = 0;
         virtual IElement* getParent() = 0;
-        virtual GLFWwindow* getWindow() = 0;
-        virtual void setWindow(GLFWwindow* window) = 0;
+        virtual Core::Application * getApplication() = 0;
+        virtual void setApplication(Core::Application *application) = 0;
         virtual IElement* getChildByTag(std::string_view tag) = 0;
     };
-} // Module
+} // Modules
 
 #endif //BIBI_IELEMENT_HPP

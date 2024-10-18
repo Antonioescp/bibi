@@ -5,11 +5,11 @@
 #include <imgui.h>
 #include "MenuItemElement.hpp"
 
-namespace Bibi::Module::Gui::
+namespace Bibi::Modules::Gui::
 inline Elements {
 
-MenuItemElement::MenuItemElement(GLFWwindow *window, std::string _optionName) : Element(window),
-                                                                                _optionName(std::move(_optionName)) {}
+MenuItemElement::MenuItemElement(Core::Application *application, std::string _optionName) : Element(application),
+                                                                                            _optionName(std::move(_optionName)) {}
 
 void MenuItemElement::render() {
     if (ImGui::MenuItem(_optionName.c_str())) {

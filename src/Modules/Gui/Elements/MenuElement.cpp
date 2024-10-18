@@ -5,7 +5,7 @@
 #include <imgui.h>
 #include "MenuElement.hpp"
 
-namespace Bibi::Module::Gui::
+namespace Bibi::Modules::Gui::
 inline Elements {
 
 void MenuElement::render() {
@@ -15,6 +15,6 @@ void MenuElement::render() {
     }
 }
 
-MenuElement::MenuElement(GLFWwindow *window, std::string _title) : Element(window), _title(std::move(_title)) {}
+MenuElement::MenuElement(Core::Application *application, std::string _title) : Element(application), _title(std::move(_title)) {}
 
 } // Elements

@@ -10,14 +10,15 @@
 #include <ranges>
 
 #include "IElement.hpp"
+#include "Core/Application.hpp"
 
-namespace Bibi::Module::Gui {
+namespace Bibi::Modules::Gui {
 
     class Element : public IElement {
     public:
         ~Element() override = default;
 
-        explicit Element(GLFWwindow *window);
+        explicit Element(Core::Application *application);
 
         Element() = default;
 
@@ -43,14 +44,14 @@ namespace Bibi::Module::Gui {
 
         IElement *getParent() override;
 
-        GLFWwindow *getWindow() override;
+        Core::Application *getApplication() override;
 
-        void setWindow(GLFWwindow *window) override;
+        void setApplication(Core::Application *application) override;
 
-        IElement* getChildByTag(std::string_view tag) override;
+        IElement *getChildByTag(std::string_view tag) override;
 
     protected:
-        GLFWwindow *_window{nullptr};
+        Core::Application *_application{nullptr};
         std::vector<std::unique_ptr<IElement>> _childrenElements{};
         std::string _tag{};
         IElement *_parent{nullptr};

@@ -5,7 +5,7 @@
 #include <imgui.h>
 #include "WindowElement.hpp"
 
-namespace Bibi::Module::Gui::
+namespace Bibi::Modules::Gui::
 inline Elements {
 
 void WindowElement::render() {
@@ -37,7 +37,7 @@ void WindowElement::close() {
     _isOpen = false;
 }
 
-WindowElement::WindowElement(GLFWwindow *window, std::string title) : Element(window), _title(std::move(title)) {
+WindowElement::WindowElement(Core::Application *application, std::string title) : Element(application), _title(std::move(title)) {
 
 }
 

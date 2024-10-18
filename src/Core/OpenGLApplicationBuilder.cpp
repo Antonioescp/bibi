@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <iostream>
 #include "OpenGLApplicationBuilder.hpp"
-#include "Module/IModuleConfigurable.hpp"
+#include "Modules/IModuleConfigurable.hpp"
 
 namespace Bibi::Core {
     IApplicationBuilder& OpenGLApplicationBuilder::setDimensions(int width, int height) {
@@ -49,6 +49,7 @@ namespace Bibi::Core {
         Application app{ window };
 
         for (auto& module: _modules) {
+            module->setApplication(&app);
             app.addModule(std::move(module));
         }
 
@@ -57,7 +58,7 @@ namespace Bibi::Core {
         return app;
     }
 
-    IApplicationBuilder& OpenGLApplicationBuilder::addModule(std::unique_ptr<Module::IModule> module) {
+    IApplicationBuilder& OpenGLApplicationBuilder::addModule(std::unique_ptr<Modules::IModule> module) {
         _modules.push_back(std::move(module));
         return *this;
     }

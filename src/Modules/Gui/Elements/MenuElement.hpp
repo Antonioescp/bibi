@@ -5,16 +5,18 @@
 #ifndef BIBI_MENUELEMENT_HPP
 #define BIBI_MENUELEMENT_HPP
 
-#include "Module/Gui/Element.hpp"
+#include "Modules/Gui/Element.hpp"
 
 
-namespace Bibi::Module::Gui::
+namespace Bibi::Modules::Gui::
 inline Elements {
 
 class MenuElement : public Element {
 public:
-    MenuElement(GLFWwindow* window, std::string _title);
+    MenuElement(Core::Application *application, std::string _title);
+
     void render() override;
+
 private:
     std::string _title;
 };

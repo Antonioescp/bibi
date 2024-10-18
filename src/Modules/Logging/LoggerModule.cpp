@@ -5,8 +5,8 @@
 #include "LoggerModule.hpp"
 #include "Logger.hpp"
 
-namespace Bibi::Module::Logging {
-    void LoggerModule::setUp(GLFWwindow* window) {
+namespace Bibi::Modules::Logging {
+    void LoggerModule::setUp() {
         Logger::initialize();
     }
 } // Logging

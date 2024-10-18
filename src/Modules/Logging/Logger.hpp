@@ -10,7 +10,7 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/daily_file_sink.h>
 
-namespace Bibi::Module::Logging {
+namespace Bibi::Modules::Logging {
 
     class Logger {
     public:

@@ -5,7 +5,7 @@
 #include <imgui.h>
 #include "TextElement.hpp"
 
-namespace Bibi::Module::Gui::
+namespace Bibi::Modules::Gui::
 inline Elements {
 
 void TextElement::render() {
@@ -22,7 +22,7 @@ void TextElement::setText(std::string text) {
     _text = std::move(text);
 }
 
-TextElement::TextElement(GLFWwindow *window, std::string text) : Element(window), _text(std::move(text)) {
+TextElement::TextElement(Core::Application *application, std::string text) : Element(application), _text(std::move(text)) {
 
 }
 

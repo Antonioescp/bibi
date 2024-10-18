@@ -3,11 +3,9 @@
 //
 
 #include <imgui.h>
-#include <GLFW/glfw3.h>
-
 #include "MainMenuBarElement.hpp"
 
-namespace Bibi::Module::Gui::
+namespace Bibi::Modules::Gui::
 inline Elements {
 
 void MainMenuBarElement::render() {
@@ -19,7 +17,7 @@ void MainMenuBarElement::render() {
 //                _toggleWindowEvent.trigger();
 //            }
 //            if (ImGui::MenuItem("Exit")) {
-//                glfwSetWindowShouldClose(_window, GLFW_TRUE);
+//                glfwSetWindowShouldClose(_application, GLFW_TRUE);
 //            }
 //            ImGui::EndMenu();
 //        }

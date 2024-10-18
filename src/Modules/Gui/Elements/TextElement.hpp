@@ -5,15 +5,15 @@
 #ifndef BIBI_TEXTELEMENT_HPP
 #define BIBI_TEXTELEMENT_HPP
 
-#include "Module/Gui/Element.hpp"
+#include "Modules/Gui/Element.hpp"
 
-namespace Bibi::Module::Gui::
+namespace Bibi::Modules::Gui::
 inline Elements {
 
 class TextElement : public Element {
 public:
     using Element::Element;
-    TextElement(GLFWwindow* window, std::string text);
+    TextElement(Core::Application *application, std::string text);
     ~TextElement() override = default;
     void render() override;
 

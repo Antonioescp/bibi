@@ -4,24 +4,24 @@
 
 #include "BibiMainMenuElement.hpp"
 #include "ElementTag.hpp"
-#include "Module/Gui/Elements/MenuElement.hpp"
-#include "Module/Gui/Elements/MainMenuBarElement.hpp"
-#include "Module/Gui/Elements/MenuItemElement.hpp"
+#include "Modules/Gui/Elements/MenuElement.hpp"
+#include "Modules/Gui/Elements/MainMenuBarElement.hpp"
+#include "Modules/Gui/Elements/MenuItemElement.hpp"
 
 namespace Bibi::Core::UI {
     void BibiMainMenuElement::setUp() {
-        using namespace Bibi::Module::Gui;
+        using namespace Bibi::Modules::Gui;
 
-        auto menuBar = std::make_unique<MainMenuBarElement>(_window);
-        auto fileMenu = std::make_unique<MenuElement>(_window, "File");
+        auto menuBar = std::make_unique<MainMenuBarElement>(_application);
+        auto fileMenu = std::make_unique<MenuElement>(_application, "File");
 
-        auto exitOption = std::make_unique<MenuItemElement>(_window, "Exit");
+        auto exitOption = std::make_unique<MenuItemElement>(_application, "Exit");
         exitOption->onClick().subscribe([this]() {
-            glfwSetWindowShouldClose(_window, GLFW_TRUE);
+            glfwSetWindowShouldClose(_application->getMainWindow(), GLFW_TRUE);
         });
 
-        auto helpMenu{ std::make_unique<MenuElement>(_window, "Help") };
-        auto aboutOption{ std::make_unique<MenuItemElement>(_window, "About") };
+        auto helpMenu{ std::make_unique<MenuElement>(_application, "Help") };
+        auto aboutOption{ std::make_unique<MenuItemElement>(_application, "About") };
         aboutOption->setTag(ElementTag::MainMenuHelpAbout);
 
         fileMenu->addElement(std::move(exitOption));

@@ -4,8 +4,8 @@
 
 #include "Element.hpp"
 
-namespace Bibi::Module::Gui {
-    Element::Element(GLFWwindow *window) : _window(window) {}
+namespace Bibi::Modules::Gui {
+    Element::Element(Core::Application *application) : _application{application} {}
 
     void Element::render() {
         for (auto &element : _childrenElements) {
@@ -65,12 +65,12 @@ namespace Bibi::Module::Gui {
         return _parent;
     }
 
-    GLFWwindow *Element::getWindow() {
-        return _window;
+    Core::Application * Element::getApplication() {
+        return _application;
     }
 
-    void Element::setWindow(GLFWwindow *window) {
-        _window = window;
+    void Element::setApplication(Core::Application *application) {
+        _application = application;
     }
 
     IElement *Element::getChildByTag(std::string_view tag) {

@@ -10,7 +10,7 @@
 
 #include "Logger.hpp"
 
-namespace Bibi::Module::Logging {
+namespace Bibi::Modules::Logging {
     const std::string Logger::_coreLogName{"core"};
     const std::string Logger::_pattern{"[%Y-%m-%d %H:%M:%S.%e] [%n] [%^%l%$] %v"};
     bool Logger::_initialized{false};

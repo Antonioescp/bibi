@@ -4,20 +4,21 @@
 
 #include "BibiAboutWindowElement.hpp"
 #include "Core/UI/ElementTag.hpp"
-#include "Module/Gui/ImGuiModule.hpp"
-#include "Module/Gui/Elements/WindowElement.hpp"
-#include "Module/Gui/Elements/MenuItemElement.hpp"
-#include "Module/Gui/Elements/TextElement.hpp"
+#include "Modules/Gui/ImGuiModule.hpp"
+#include "Modules/Gui/Elements/WindowElement.hpp"
+#include "Modules/Gui/Elements/MenuItemElement.hpp"
+#include "Modules/Gui/Elements/TextElement.hpp"
 
 namespace Bibi::Core::UI {
 
     void BibiAboutWindowElement::setUp() {
-        using namespace Bibi::Module::Gui;
+        using namespace Bibi::Modules::Gui;
 
-        auto window{ std::make_unique<WindowElement>(_window) };
+        auto window{ std::make_unique<WindowElement>(_application) };
         window->setTitle("About");
 
-        auto aboutMenuOption{ ImGuiModule::getElementByTag<MenuItemElement>(ElementTag::MainMenuHelpAbout)  };
+        auto uiModule{ _application->getModule<ImGuiModule>() };
+        auto aboutMenuOption{ uiModule->getElementByTag<MenuItemElement>(ElementTag::MainMenuHelpAbout) };
         aboutMenuOption->onClick().subscribe([self = window.get()]() {
             self->open();
         });
@@ -30,7 +31,7 @@ namespace Bibi::Core::UI {
             "  - Harold J. Moreno.\n"
         };
 
-        auto text{ std::make_unique<TextElement>(_window, aboutText) };
+        auto text{ std::make_unique<TextElement>(_application, aboutText) };
         window->addElement(std::move(text));
         this->addElement(std::move(window));
         Element::setUp();

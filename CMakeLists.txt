@@ -9,19 +9,19 @@ add_executable(bibi main.cpp
         src/Core/IApplicationBuilder.hpp
         src/Core/OpenGLApplicationBuilder.cpp
         src/Core/OpenGLApplicationBuilder.hpp
-        src/Module/IModuleConfigurable.hpp
-        src/Module/IModule.hpp
-        src/Module/Gui/ImGuiModule.cpp
-        src/Module/Gui/ImGuiModule.hpp
-        src/Module/Logging/LoggerModule.cpp
-        src/Module/Logging/LoggerModule.hpp
-        src/Module/Logging/Logger.cpp
-        src/Module/Logging/Logger.hpp
-        src/Module/IModuleDeconstructable.hpp
-        src/Module/IModuleRunnable.hpp
-        src/Module/Gui/IElement.hpp
-        src/Module/Gui/Elements/MainMenuBarElement.cpp
-        src/Module/Gui/Elements/MainMenuBarElement.hpp
+        src/Modules/IModuleConfigurable.hpp
+        src/Modules/IModule.hpp
+        src/Modules/Gui/ImGuiModule.cpp
+        src/Modules/Gui/ImGuiModule.hpp
+        src/Modules/Logging/LoggerModule.cpp
+        src/Modules/Logging/LoggerModule.hpp
+        src/Modules/Logging/Logger.cpp
+        src/Modules/Logging/Logger.hpp
+        src/Modules/IModuleDeconstructable.hpp
+        src/Modules/IModuleRunnable.hpp
+        src/Modules/Gui/IElement.hpp
+        src/Modules/Gui/Elements/MainMenuBarElement.cpp
+        src/Modules/Gui/Elements/MainMenuBarElement.hpp
         src/Core/Events/Event.hpp
         src/Core/Events/IEventSubscriber.hpp
         src/Core/Events/IEventPublisher.hpp
@@ -29,22 +29,22 @@ add_executable(bibi main.cpp
         src/Core/Exceptions/Exception.cpp
         src/Core/Exceptions/Exception.hpp
         src/Core/Events/Function.hpp
-        src/Module/Gui/Element.cpp
-        src/Module/Gui/Element.hpp
-        src/Module/Gui/Elements/MenuElement.cpp
-        src/Module/Gui/Elements/MenuElement.hpp
-        src/Module/Gui/Elements/MenuItemElement.cpp
-        src/Module/Gui/Elements/MenuItemElement.hpp
-        src/Module/Gui/Elements/WindowElement.cpp
-        src/Module/Gui/Elements/WindowElement.hpp
+        src/Modules/Gui/Element.cpp
+        src/Modules/Gui/Element.hpp
+        src/Modules/Gui/Elements/MenuElement.cpp
+        src/Modules/Gui/Elements/MenuElement.hpp
+        src/Modules/Gui/Elements/MenuItemElement.cpp
+        src/Modules/Gui/Elements/MenuItemElement.hpp
+        src/Modules/Gui/Elements/WindowElement.cpp
+        src/Modules/Gui/Elements/WindowElement.hpp
         src/Core/UI/BibiMainMenuElement.cpp
         src/Core/UI/BibiMainMenuElement.hpp
         src/Core/UI/ElementTag.cpp
         src/Core/UI/ElementTag.hpp
         src/Core/UI/BibiAboutWindowElement.cpp
         src/Core/UI/BibiAboutWindowElement.hpp
-        src/Module/Gui/Elements/TextElement.cpp
-        src/Module/Gui/Elements/TextElement.hpp
+        src/Modules/Gui/Elements/TextElement.cpp
+        src/Modules/Gui/Elements/TextElement.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

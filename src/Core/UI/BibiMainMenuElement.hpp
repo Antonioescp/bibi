@@ -5,13 +5,13 @@
 #ifndef BIBI_BIBIMAINMENUELEMENT_HPP
 #define BIBI_BIBIMAINMENUELEMENT_HPP
 
-#include "Module/Gui/Element.hpp"
+#include "Modules/Gui/Element.hpp"
 
 namespace Bibi::Core::UI {
 
-    class BibiMainMenuElement : public Module::Gui::Element {
+    class BibiMainMenuElement : public Modules::Gui::Element {
     public:
-        using Module::Gui::Element::Element;
+        using Modules::Gui::Element::Element;
         ~BibiMainMenuElement() override = default;
         void setUp() override;
     };

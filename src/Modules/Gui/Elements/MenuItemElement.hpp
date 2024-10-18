@@ -6,14 +6,14 @@
 #define BIBI_MENUITEMELEMENT_HPP
 
 #include "Core/Events/Event.hpp"
-#include "Module/Gui/Element.hpp"
+#include "Modules/Gui/Element.hpp"
 
-namespace Bibi::Module::Gui::
+namespace Bibi::Modules::Gui::
 inline Elements {
 
 class MenuItemElement : public Element {
 public:
-    MenuItemElement(GLFWwindow* window, std::string _optionName);
+    MenuItemElement(Core::Application *application, std::string _optionName);
     void render() override;
 
     void setOptionName(std::string optionName);
@@ -27,7 +27,7 @@ private:
 
 } // Elements
 // Gui
-// Module
+// Modules
 // Bibi
 
 #endif //BIBI_MENUITEMELEMENT_HPP

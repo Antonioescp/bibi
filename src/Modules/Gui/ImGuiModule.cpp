@@ -9,29 +9,25 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "IElement.hpp"
-#include "Module/Gui/Elements/MainMenuBarElement.hpp"
-#include "Module/Gui/Elements/MenuElement.hpp"
-#include "Module/Gui/Elements/MenuItemElement.hpp"
-#include "Module/Gui/Elements/WindowElement.hpp"
+#include "Modules/Gui/Elements/MenuElement.hpp"
 #include "Core/UI/BibiMainMenuElement.hpp"
 #include "Core/UI/BibiAboutWindowElement.hpp"
 
-using namespace Bibi::Module::Logging;
+using namespace Bibi::Modules::Logging;
 
-namespace Bibi::Module::Gui {
+namespace Bibi::Modules::Gui {
     const std::string ImGuiModule::name = "imgui";
-    std::vector<std::unique_ptr<IElement>> ImGuiModule::s_elements;
 
-    void ImGuiModule::setUp(GLFWwindow* window) {
-        initializeImGui(window);
-        registerElements(window);
+    void ImGuiModule::setUp() {
+        initializeImGui();
+        registerElements();
 
         for (auto& element : s_elements) {
             element->setUp();
         }
     }
 
-    void ImGuiModule::run(GLFWwindow *window) {
+    void ImGuiModule::run() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -44,7 +40,7 @@ namespace Bibi::Module::Gui {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
 
-    void ImGuiModule::tearDown(GLFWwindow* window) {
+    void ImGuiModule::tearDown() {
         _logger->info("Tearing down imgui");
 
         for (auto& element : s_elements | std::views::reverse) {
@@ -61,7 +57,7 @@ namespace Bibi::Module::Gui {
         s_elements.push_back(std::move(element));
     }
 
-    void ImGuiModule::initializeImGui(GLFWwindow *window) {
+    void ImGuiModule::initializeImGui() {
         _logger = Logger::get(ImGuiModule::name);
         _logger->info("Setting up imgui");
 
@@ -71,18 +67,18 @@ namespace Bibi::Module::Gui {
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
         ImGui::StyleColorsDark();
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplGlfw_InitForOpenGL(_application->getMainWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 150");
 
         _logger->info("imgui setup complete");
     }
 
-    void ImGuiModule::registerElements(GLFWwindow *window) {
+    void ImGuiModule::registerElements() {
         using namespace Bibi::Core::UI;
-        auto mainMenuBar = std::make_unique<BibiMainMenuElement>(window);
+        auto mainMenuBar = std::make_unique<BibiMainMenuElement>(_application);
         addElement(std::move(mainMenuBar));
 
-        auto aboutWindow{ std::make_unique<BibiAboutWindowElement>(window) };
+        auto aboutWindow{ std::make_unique<BibiAboutWindowElement>(_application) };
         addElement(std::move(aboutWindow));
     }
 
@@ -91,4 +87,4 @@ namespace Bibi::Module::Gui {
             return element.get();
         });
     }
-} // Module
+} // Modules

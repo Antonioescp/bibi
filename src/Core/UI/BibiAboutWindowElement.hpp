@@ -5,11 +5,11 @@
 #ifndef BIBI_BIBIABOUTWINDOWELEMENT_HPP
 #define BIBI_BIBIABOUTWINDOWELEMENT_HPP
 
-#include "Module/Gui/Element.hpp"
+#include "Modules/Gui/Element.hpp"
 
 namespace Bibi::Core::UI {
 
-    class BibiAboutWindowElement : public Module::Gui::Element {
+    class BibiAboutWindowElement : public Modules::Gui::Element {
     public:
         using Element::Element;
         ~BibiAboutWindowElement() override = default;

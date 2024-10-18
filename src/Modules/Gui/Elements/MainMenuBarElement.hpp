@@ -8,10 +8,10 @@
 #include <functional>
 #include <string>
 #include <utility>
-#include "Module/Gui/Element.hpp"
+#include "Modules/Gui/Element.hpp"
 #include "Core/Events/Event.hpp"
 
-namespace Bibi::Module::Gui:: inline Elements {
+namespace Bibi::Modules::Gui:: inline Elements {
 
     class MainMenuBarElement : public Element {
     public:

@@ -9,9 +9,9 @@
 #include <GLFW/glfw3.h>
 
 #include "IApplicationBuilder.hpp"
-#include "Module/IModuleConfigurable.hpp"
-#include "Module/IModuleDeconstructable.hpp"
-#include "Module/IModuleRunnable.hpp"
+#include "Modules/IModuleConfigurable.hpp"
+#include "Modules/IModuleDeconstructable.hpp"
+#include "Modules/IModuleRunnable.hpp"
 
 namespace Bibi::Core {
 
@@ -19,14 +19,14 @@ namespace Bibi::Core {
     public:
         IApplicationBuilder& setDimensions(int width, int height) override;
         IApplicationBuilder& setTitle(std::string title) override;
-        IApplicationBuilder& addModule(std::unique_ptr<Module::IModule> module) override;
+        IApplicationBuilder& addModule(std::unique_ptr<Modules::IModule> module) override;
         Application build() override;
 
     private:
         int _width{ 640 };
         int _height{ 480 };
         std::string _title{ "Application" };
-        std::vector<std::unique_ptr<Bibi::Module::IModule>> _modules;
+        std::vector<std::unique_ptr<Bibi::Modules::IModule>> _modules;
     };
 
 } // Application
