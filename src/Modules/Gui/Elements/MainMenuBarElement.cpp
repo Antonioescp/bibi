@@ -8,9 +8,9 @@
 namespace Bibi::Modules::Gui::
 inline Elements {
 
-void MainMenuBarElement::render() {
+void MainMenuBarElement::update() {
     if (ImGui::BeginMainMenuBar()) {
-        Element::render();
+        Element::update();
 
 //        if (ImGui::BeginMenu("File")) {
 //            if (ImGui::MenuItem("Toggle Window")) {

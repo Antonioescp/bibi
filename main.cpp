@@ -21,10 +21,10 @@ int main() {
         auto app{ appBuilder.build() };
         app.run();
     }
-    catch (Exception& exception) {
+    catch (Bibi::Core::Exceptions::Exception& exception) {
         Logging::Logger::initialize();
         auto logger{ Logging::Logger::get("core") };
-        auto location{ exception.location() };
+        auto& location{ exception.location() };
         logger->error("[{}][{}] An error occurred: {}", location.file_name(), location.line(), exception.what());
         logger->error("Stacktrace:");
         for (const auto& entry : exception.stacktrace()) {

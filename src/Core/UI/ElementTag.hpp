@@ -13,6 +13,8 @@ namespace Bibi::Core::UI {
         ElementTag() = delete;
 
         static const std::string MainMenuHelpAbout;
+        static const std::string MainMenuWindowsSubjectList;
+        static const std::string WindowObjectList;
     };
 
 } // UI

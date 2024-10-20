@@ -8,10 +8,10 @@
 namespace Bibi::Modules::Gui::
 inline Elements {
 
-void WindowElement::render() {
+void WindowElement::update() {
     if (_isOpen) {
         if (ImGui::Begin(_title.c_str(), &_isOpen)) {
-            Element::render();
+            Element::update();
         }
         ImGui::End();
     }

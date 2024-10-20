@@ -22,15 +22,27 @@ namespace Bibi::Modules::Gui {
 
         Element() = default;
 
-        void render() override;
-
         void setUp() override;
+
+        void update() override;
 
         void tearDown() override;
 
         void addElement(std::unique_ptr<IElement> element) override;
 
-        void removeElement(std::string tag) override;
+        void removeElement(IElement *element) override;
+
+        void removeElements(std::string tag) override;
+
+        template <typename TElement>
+        requires std::derived_from<TElement, IElement>
+        void removeElements() {
+            for (auto &element : _childrenElements) {
+                if (dynamic_cast<TElement*>(element.get())) {
+                    _elementsToRemove.push_back(element.get());
+                }
+            }
+        }
 
         void clearElements() override;
 
@@ -53,8 +65,12 @@ namespace Bibi::Modules::Gui {
     protected:
         Core::Application *_application{nullptr};
         std::vector<std::unique_ptr<IElement>> _childrenElements{};
+        std::vector<std::unique_ptr<IElement>> _elementsToAdd{};
+        std::vector<IElement*> _elementsToRemove{};
         std::string _tag{};
         IElement *_parent{nullptr};
+
+        void handlePendingElements();
     };
 
 } // Gui

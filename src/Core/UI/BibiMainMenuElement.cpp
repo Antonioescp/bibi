@@ -20,12 +20,20 @@ namespace Bibi::Core::UI {
             glfwSetWindowShouldClose(_application->getMainWindow(), GLFW_TRUE);
         });
 
+        auto windowsOption{ std::make_unique<MenuElement>(_application, "Windows") };
+        auto subjectListOption{ std::make_unique<MenuItemElement>(_application, "Subject List") };
+        subjectListOption->setTag(ElementTag::MainMenuWindowsSubjectList);
+
         auto helpMenu{ std::make_unique<MenuElement>(_application, "Help") };
         auto aboutOption{ std::make_unique<MenuItemElement>(_application, "About") };
         aboutOption->setTag(ElementTag::MainMenuHelpAbout);
 
         fileMenu->addElement(std::move(exitOption));
         menuBar->addElement(std::move(fileMenu));
+
+        windowsOption->addElement(std::move(subjectListOption));
+        menuBar->addElement(std::move(windowsOption));
+
         helpMenu->addElement(std::move(aboutOption));
         menuBar->addElement(std::move(helpMenu));
         this->addElement(std::move(menuBar));

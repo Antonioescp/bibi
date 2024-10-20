@@ -17,7 +17,7 @@ public:
 
     WindowElement(Core::Application *application, std::string title);
 
-    void render() override;
+    void update() override;
 
     [[nodiscard]] std::string getTitle() const;
 

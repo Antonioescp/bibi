@@ -45,6 +45,14 @@ add_executable(bibi main.cpp
         src/Core/UI/BibiAboutWindowElement.hpp
         src/Modules/Gui/Elements/TextElement.cpp
         src/Modules/Gui/Elements/TextElement.hpp
+        src/Core/UI/ObjectListWindow.cpp
+        src/Core/UI/ObjectListWindow.hpp
+        src/Core/Object.cpp
+        src/Core/Object.hpp
+        src/Modules/Gui/Elements/TreeNodeElement.cpp
+        src/Modules/Gui/Elements/TreeNodeElement.hpp
+        src/Modules/Gui/Elements/ButtonElement.cpp
+        src/Modules/Gui/Elements/ButtonElement.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

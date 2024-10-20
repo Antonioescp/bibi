@@ -11,7 +11,7 @@ inline Elements {
 MenuItemElement::MenuItemElement(Core::Application *application, std::string _optionName) : Element(application),
                                                                                             _optionName(std::move(_optionName)) {}
 
-void MenuItemElement::render() {
+void MenuItemElement::update() {
     if (ImGui::MenuItem(_optionName.c_str())) {
         _clickEvent.trigger();
     }

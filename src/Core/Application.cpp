@@ -55,4 +55,35 @@ namespace Bibi::Core {
 
         glfwTerminate();
     }
+
+    const std::vector<std::unique_ptr<Core::Object>> &Application::getObjects() const {
+        return _objects;
+    }
+
+    void Application::clearObjects() {
+        _objects.clear();
+    }
+
+    void Application::addObject(std::unique_ptr<Core::Object> object) {
+        _objects.push_back(std::move(object));
+    }
+
+    void Application::removeObject(const Core::Object *object) {
+        auto remover = std::remove_if(_objects.begin(), _objects.end(), [&object](auto &element) {
+            return element.get() == object;
+        });
+        _objects.erase(remover, _objects.end());
+    }
+
+    std::vector<Core::Object*> Application::getRootObjects() const {
+        std::vector<Core::Object*> rootObjects{};
+
+        for (const auto& object : _objects) {
+            if (object->getParent() == nullptr) {
+                rootObjects.push_back(object.get());
+            }
+        }
+
+        return rootObjects;
+    }
 } // Application

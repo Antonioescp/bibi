@@ -8,10 +8,17 @@
 namespace Bibi::Modules::Gui::
 inline Elements {
 
-void TextElement::render() {
-    ImGui::Text("%s", _text.c_str());
+void TextElement::update() {
+    if (_isWrapped)
+    {
+        ImGui::TextWrapped("%s", _text.c_str());
+    }
+    else
+    {
+        ImGui::Text("%s", _text.c_str());
+    }
 
-    Element::render();
+    Element::update();
 }
 
 const std::string &TextElement::getText() const {
@@ -24,6 +31,14 @@ void TextElement::setText(std::string text) {
 
 TextElement::TextElement(Core::Application *application, std::string text) : Element(application), _text(std::move(text)) {
 
+}
+
+bool TextElement::isWrapped() const {
+    return _isWrapped;
+}
+
+void TextElement::setWrapped(bool wrapped) {
+    _isWrapped = wrapped;
 }
 
 } // Elements

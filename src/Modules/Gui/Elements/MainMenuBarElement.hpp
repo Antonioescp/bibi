@@ -17,7 +17,7 @@ namespace Bibi::Modules::Gui:: inline Elements {
     public:
         using Element::Element;
         MainMenuBarElement() = default;
-        void render() override;
+        void update() override;
     };
 
 } // Gui

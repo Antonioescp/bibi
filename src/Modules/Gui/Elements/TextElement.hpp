@@ -15,13 +15,17 @@ public:
     using Element::Element;
     TextElement(Core::Application *application, std::string text);
     ~TextElement() override = default;
-    void render() override;
+    void update() override;
 
     [[nodiscard]] const std::string& getText() const;
     void setText(std::string text);
 
+    [[nodiscard]] bool isWrapped() const;
+    void setWrapped(bool wrapped);
+
 private:
     std::string _text;
+    bool _isWrapped{true};
 };
 
 } // Elements

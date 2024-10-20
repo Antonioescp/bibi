@@ -8,9 +8,9 @@
 namespace Bibi::Modules::Gui::
 inline Elements {
 
-void MenuElement::render() {
+void MenuElement::update() {
     if (ImGui::BeginMenu(_title.c_str())) {
-        Element::render();
+        Element::update();
         ImGui::EndMenu();
     }
 }

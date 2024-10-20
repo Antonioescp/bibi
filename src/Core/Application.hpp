@@ -15,6 +15,7 @@
 #include "Modules/IModuleConfigurable.hpp"
 #include "Modules/IModuleDeconstructable.hpp"
 #include "Modules/IModuleRunnable.hpp"
+#include "Object.hpp"
 
 namespace Bibi::Core {
 
@@ -25,6 +26,12 @@ namespace Bibi::Core {
         void run();
 
         GLFWwindow* getMainWindow() { return _mainWindow; }
+
+        [[nodiscard]] const std::vector<std::unique_ptr<Core::Object>>& getObjects() const;
+        [[nodiscard]] std::vector<Core::Object*> getRootObjects() const;
+        void clearObjects();
+        void addObject(std::unique_ptr<Core::Object> object);
+        void removeObject(const Core::Object* object);
 
         template <typename TModule>
         requires std::derived_from<TModule, Modules::IModule>
@@ -39,6 +46,7 @@ namespace Bibi::Core {
 
     private:
         GLFWwindow* _mainWindow;
+        std::vector<std::unique_ptr<Core::Object>> _objects;
         std::vector<std::unique_ptr<Modules::IModule>> _modules;
         std::vector<Modules::IModuleConfigurable*> _configurableModules;
         std::vector<Modules::IModuleDeconstructable*> _deconstructableModules;

@@ -15,7 +15,7 @@ class MenuElement : public Element {
 public:
     MenuElement(Core::Application *application, std::string _title);
 
-    void render() override;
+    void update() override;
 
 private:
     std::string _title;

@@ -17,11 +17,12 @@ namespace Bibi::Modules::Gui {
     class IElement {
     public:
         virtual ~IElement() = default;
-        virtual void render() = 0;
+        virtual void update() = 0;
         virtual void setUp() = 0;
         virtual void tearDown() = 0;
         virtual void addElement(std::unique_ptr<IElement> element) = 0;
-        virtual void removeElement(std::string tag) = 0;
+        virtual void removeElement(IElement* element) = 0;
+        virtual void removeElements(std::string tag) = 0;
         virtual void clearElements() = 0;
         virtual std::vector<std::unique_ptr<IElement>>& getElements() = 0;
         virtual void setTag(std::string tag) = 0;

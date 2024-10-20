@@ -14,7 +14,7 @@ inline Elements {
 class MenuItemElement : public Element {
 public:
     MenuItemElement(Core::Application *application, std::string _optionName);
-    void render() override;
+    void update() override;
 
     void setOptionName(std::string optionName);
     std::string getOptionName();
