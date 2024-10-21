@@ -15,6 +15,7 @@
 #include "Core/UI/ObjectListWindow.hpp"
 #include "Core/UI/ElementTag.hpp"
 #include "Core/UI/InspectorWindow.hpp"
+#include "Core/UI/InfoWindow.hpp"
 
 using namespace Bibi::Modules::Logging;
 
@@ -80,5 +81,8 @@ namespace Bibi::Modules::Gui {
         auto inspectorWindow{ std::make_unique<InspectorWindow>(_application) };
         inspectorWindow->setTag(ElementTag::WindowInspector);
         _elements.add(std::move(inspectorWindow));
+
+        auto infoWindow{ std::make_unique<InfoWindow>(_application) };
+        _elements.add(std::move(infoWindow));
     }
 } // Modules

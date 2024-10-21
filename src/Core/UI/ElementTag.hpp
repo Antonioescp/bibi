@@ -15,6 +15,7 @@ namespace Bibi::Core::UI {
         static const std::string MainMenuHelpAbout;
         static const std::string MainMenuWindowsSubjectList;
         static const std::string MainMenuWindowsInspector;
+        static const std::string MainMenuWindowsDebug;
         static const std::string WindowObjectList;
         static const std::string WindowInspector;
     };
