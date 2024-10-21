@@ -27,6 +27,10 @@ namespace Bibi::Modules::Gui {
         requires std::derived_from<TElement, IElement>
         TElement* getElementByTag(const std::string& tag) {
             for (auto& element : s_elements) {
+                if (auto converted{ dynamic_cast<TElement*>(element.get()) }; element->getTag() == tag && converted != nullptr) {
+                    return converted;
+                }
+
                 auto found{ element->getChildByTag(tag) };
                 if (found) {
                     return dynamic_cast<TElement*>(found);
