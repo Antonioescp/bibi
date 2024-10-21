@@ -38,4 +38,10 @@ int main() {
         logger->error("An error occurred: {}", exception.what());
         return 1;
     }
+    catch (...) {
+        Logging::Logger::initialize();
+        auto logger{ Logging::Logger::get("core") };
+        logger->error("An unknown error occurred");
+        return 1;
+    }
 }
