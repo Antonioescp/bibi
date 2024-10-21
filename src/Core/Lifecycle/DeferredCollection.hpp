@@ -70,7 +70,7 @@ namespace Bibi::Core::Lifecycle {
          * @param item El elemento a agregar.
          * @note El objeto se añadirá en el siguiente ciclo de vida.
          */
-        void add(std::unique_ptr<TItem> item) {
+        virtual void add(std::unique_ptr<TItem> item) {
             _itemsToAdd.push_back(std::move(item));
         }
 
@@ -79,7 +79,7 @@ namespace Bibi::Core::Lifecycle {
          * @param item El elemento a eliminar.
          * @note El objeto se eliminará en el siguiente ciclo de vida.
          */
-        void remove(TItem* item) {
+        virtual void remove(TItem* item) {
             _itemsToRemove.push_back(item);
         }
 
@@ -119,7 +119,7 @@ namespace Bibi::Core::Lifecycle {
          * Realiza las operaciones pendientes de añadir y eliminar objetos.
          * @note Este método debe ser llamado en cada ciclo de vida.
          */
-        void handlePendingItemsOperations() {
+        virtual void handlePendingItemsOperations() {
             for (auto& item : _itemsToAdd) {
                 item->setUp();
                 _items.push_back(std::move(item));

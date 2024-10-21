@@ -31,16 +31,16 @@ namespace Bibi::Core::UI {
         auto aboutOption{ std::make_unique<MenuItemElement>(_application, "About") };
         aboutOption->setTag(ElementTag::MainMenuHelpAbout);
 
-        fileMenu->addElement(std::move(exitOption));
-        menuBar->addElement(std::move(fileMenu));
+        fileMenu->add(std::move(exitOption));
+        menuBar->add(std::move(fileMenu));
 
-        windowsOption->addElement(std::move(subjectListOption));
-        windowsOption->addElement(std::move(inspectorOption));
-        menuBar->addElement(std::move(windowsOption));
+        windowsOption->add(std::move(subjectListOption));
+        windowsOption->add(std::move(inspectorOption));
+        menuBar->add(std::move(windowsOption));
 
-        helpMenu->addElement(std::move(aboutOption));
-        menuBar->addElement(std::move(helpMenu));
-        this->addElement(std::move(menuBar));
+        helpMenu->add(std::move(aboutOption));
+        menuBar->add(std::move(helpMenu));
+        this->add(std::move(menuBar));
 
         Element::setUp();
     }

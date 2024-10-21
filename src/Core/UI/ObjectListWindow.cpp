@@ -38,7 +38,7 @@ namespace Bibi::Core::UI {
             this->buildTree(target);
         });
 
-        window->addElement(std::move(addButton));
+        window->add(std::move(addButton));
 
         // Listening to the click event of the menu item to open the window
         auto ui{_application->getModule<ImGuiModule>()};
@@ -51,7 +51,7 @@ namespace Bibi::Core::UI {
         // Building object tree
         this->buildTree(window.get());
 
-        addElement(std::move(window));
+        this->add(std::move(window));
         Element::setUp();
     }
 
@@ -65,7 +65,7 @@ namespace Bibi::Core::UI {
                 objectSelectedEvent.trigger(*obj);
             });
 
-            treeNode->addElement(std::move(childTreeNode));
+            treeNode->add(std::move(childTreeNode));
         }
 
         return treeNode;
@@ -79,7 +79,7 @@ namespace Bibi::Core::UI {
                 objectSelectedEvent.trigger(*obj);
             });
 
-            window->addElement(std::move(treeNode));
+            window->add(std::move(treeNode));
         }
     }
 } // UI

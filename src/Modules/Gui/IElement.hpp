@@ -26,36 +26,6 @@ namespace Bibi::Modules::Gui {
         ~IElement() override = default;
 
         /**
-         * Agrega un elemento hijo a este elemento.
-         * @param element El elemento hijo a agregar.
-         * @note El elemento hijo será adecuadamente administrado por el elemento padre.
-         */
-        virtual void addElement(std::unique_ptr<IElement> element) = 0;
-
-        /**
-         * Elimina un elemento hijo de este elemento.
-         * @param element El elemento hijo a eliminar.
-         */
-        virtual void removeElement(IElement *element) = 0;
-
-        /**
-         * Elimina todos los elementos hijos de este elemento que tengan una etiqueta específica.
-         * @param tag La etiqueta de los elementos a eliminar.
-         */
-        virtual void removeElements(std::string tag) = 0;
-
-        /**
-         * Elimina todos los elementos hijos de este elemento.
-         */
-        virtual void clearElements() = 0;
-
-        /**
-         * Obtiene todos los elementos hijos de este elemento.
-         * @return Todos los elementos hijos de este elemento.
-         */
-        virtual std::vector<std::unique_ptr<IElement>> &getElements() = 0;
-
-        /**
          * Establece la etiqueta de este elemento.
          * @param tag La etiqueta de este elemento.
          */

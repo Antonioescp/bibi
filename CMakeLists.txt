@@ -57,7 +57,6 @@ add_executable(bibi main.cpp
         src/Core/Lifecycle/ILifecycleAware.hpp
         src/Core/Lifecycle/DeferredCollection.hpp
         src/Core/Concepts/Pointer.hpp
-        src/Modules/Gui/ElementCollection.hpp
         src/Core/Concepts/Lifecycle.hpp
 )
 

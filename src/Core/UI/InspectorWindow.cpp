@@ -36,7 +36,7 @@ namespace Bibi::Core::UI {
         });
 
         // Adding the window
-        this->addElement(std::move(window));
+        this->add(std::move(window));
         Element::setUp();
     }
 } // UI
