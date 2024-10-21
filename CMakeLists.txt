@@ -58,6 +58,7 @@ add_executable(bibi main.cpp
         src/Core/Lifecycle/DeferredCollection.hpp
         src/Core/Concepts/Pointer.hpp
         src/Core/Concepts/Lifecycle.hpp
+        src/Modules/Logging/LoggerMixin.hpp
 )
 
 target_include_directories(bibi PRIVATE src)
