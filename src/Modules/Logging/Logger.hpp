@@ -28,13 +28,6 @@ namespace Bibi::Modules::Logging {
         static void initialize();
 
         /**
-         * Crea un logger que escribe en la consola y en un archivo diario.
-         * @param name Nombre del logger.
-         * @return El nuevo logger para escribir en consola y archivo diario.
-         */
-        static std::shared_ptr<spdlog::logger> createDailyFileLogger(const std::string& name);
-
-        /**
          * Obtiene un logger existente o lo crea si no existe.
          * @param name Nombre del logger a obtener.
          * @return El logger obtenido.
@@ -70,6 +63,13 @@ namespace Bibi::Modules::Logging {
          * @return El sink para escribir en un archivo diario.
          */
         static std::shared_ptr<spdlog::sinks::daily_file_sink_mt> createDailyFileSink(const std::string& name);
+
+        /**
+         * Crea un logger que escribe en la consola y en un archivo diario.
+         * @param name Nombre del logger.
+         * @return El nuevo logger para escribir en consola y archivo diario.
+         */
+        static std::shared_ptr<spdlog::logger> createDailyFileLogger(const std::string& name);
 
         /**
          * Crea un logger con los sinks especificados.
