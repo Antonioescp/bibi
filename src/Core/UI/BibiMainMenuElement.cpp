@@ -24,6 +24,9 @@ namespace Bibi::Core::UI {
         auto subjectListOption{ std::make_unique<MenuItemElement>(_application, "Subject List") };
         subjectListOption->setTag(ElementTag::MainMenuWindowsSubjectList);
 
+        auto inspectorOption{ std::make_unique<MenuItemElement>(_application, "Inspector") };
+        inspectorOption->setTag(ElementTag::MainMenuWindowsInspector);
+
         auto helpMenu{ std::make_unique<MenuElement>(_application, "Help") };
         auto aboutOption{ std::make_unique<MenuItemElement>(_application, "About") };
         aboutOption->setTag(ElementTag::MainMenuHelpAbout);
@@ -32,6 +35,7 @@ namespace Bibi::Core::UI {
         menuBar->addElement(std::move(fileMenu));
 
         windowsOption->addElement(std::move(subjectListOption));
+        windowsOption->addElement(std::move(inspectorOption));
         menuBar->addElement(std::move(windowsOption));
 
         helpMenu->addElement(std::move(aboutOption));

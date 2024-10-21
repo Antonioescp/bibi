@@ -13,8 +13,8 @@
 #include "Core/UI/BibiMainMenuElement.hpp"
 #include "Core/UI/BibiAboutWindowElement.hpp"
 #include "Core/UI/ObjectListWindow.hpp"
-#include "Core/Object.hpp"
 #include "Core/UI/ElementTag.hpp"
+#include "Core/UI/InspectorWindow.hpp"
 
 using namespace Bibi::Modules::Logging;
 
@@ -85,8 +85,12 @@ namespace Bibi::Modules::Gui {
         addElement(std::move(aboutWindow));
 
         auto subjectListWindow{ std::make_unique<ObjectListWindow>(_application) };
-        subjectListWindow->setTag(ElementTag::MainMenuWindowsSubjectList);
+        subjectListWindow->setTag(ElementTag::WindowObjectList);
         addElement(std::move(subjectListWindow));
+
+        auto inspectorWindow{ std::make_unique<InspectorWindow>(_application) };
+        inspectorWindow->setTag(ElementTag::WindowInspector);
+        addElement(std::move(inspectorWindow));
     }
 
     auto ImGuiModule::getElements() {
