@@ -35,7 +35,19 @@ namespace Bibi::Core {
         _children.clear();
     }
 
-    std::vector<Object *> &Object::getChildren() {
+    const std::vector<Object *> &Object::getChildren() {
         return _children;
+    }
+
+    void Object::setUp() {
+
+    }
+
+    void Object::update() {
+
+    }
+
+    void Object::tearDown() {
+
     }
 } // Core
