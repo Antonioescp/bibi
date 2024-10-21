@@ -11,11 +11,11 @@
 
 #include "IElement.hpp"
 #include "Core/Application.hpp"
-#include "Core/Lifecycle/DeferredCollectionMixin.hpp"
+#include "Core/Lifecycle/DeferredCollection.hpp"
 
 namespace Bibi::Modules::Gui {
 
-    class Element : public Core::Lifecycle::DeferredCollectionMixin<IElement, IElement> {
+    class Element : public virtual IElement {
     public:
         ~Element() override = default;
 
@@ -30,6 +30,12 @@ namespace Bibi::Modules::Gui {
          */
         Element() = default;
 
+        void setUp() override;
+
+        void update() override;
+
+        void tearDown() override;
+
         /**
          * Elimina todos los elementos hijos de este elemento que sean del tipo especificado.
          * @tparam TElement El tipo de elemento a eliminar.
@@ -38,9 +44,9 @@ namespace Bibi::Modules::Gui {
         template <typename TElement>
         requires std::derived_from<TElement, IElement>
         void removeElements() {
-            for (auto &element : _items) {
+            for (auto &element : _elements) {
                 if (dynamic_cast<TElement*>(element.get())) {
-                    this->remove(element.get());
+                    _elements.remove(element.get());
                 }
             }
         }
@@ -59,6 +65,10 @@ namespace Bibi::Modules::Gui {
 
         IElement *getChildByTag(std::string_view tag) override;
 
+        Core::Lifecycle::DeferredCollection<IElement>& getElements() {
+            return _elements;
+        }
+
     protected:
         /**
          * Aplicacion a la que pertenece el elemento.
@@ -76,10 +86,9 @@ namespace Bibi::Modules::Gui {
         IElement *_parent{nullptr};
 
         /**
-         * Primero establece o remueve los padres de los elementos que se van a agregar o eliminar, respectivamente.
-         * Luego, llama a la implementación de la clase base.
+         * Colección de elementos hijos.
          */
-        void handlePendingItemsOperations() override;
+         Core::Lifecycle::DeferredCollection<IElement> _elements{};
     };
 
 } // Gui

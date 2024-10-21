@@ -32,8 +32,8 @@ namespace Bibi::Core::UI {
         };
 
         auto text{ std::make_unique<TextElement>(_application, aboutText) };
-        window->add(std::move(text));
-        this->add(std::move(window));
+        window->getElements().add(std::move(text));
+        this->getElements().add(std::move(window));
         Element::setUp();
     }
 } // UI

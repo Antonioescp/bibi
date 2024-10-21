@@ -5,8 +5,6 @@
 #include "Element.hpp"
 
 namespace Bibi::Modules::Gui {
-    using Base = Core::Lifecycle::DeferredCollectionMixin<IElement, IElement>;
-
     Element::Element(Core::Application *application) : _application{application} {}
 
     void Element::setTag(std::string tag) {
@@ -34,7 +32,7 @@ namespace Bibi::Modules::Gui {
     }
 
     IElement *Element::getChildByTag(std::string_view tag) {
-        for (auto &element: _items) {
+        for (auto &element: _elements) {
             if (element->getTag() == tag) {
                 return element.get();
             }
@@ -48,15 +46,15 @@ namespace Bibi::Modules::Gui {
         return {};
     }
 
-    void Element::handlePendingItemsOperations() {
-        for (auto& item : _itemsToAdd) {
-            item->setParent(this);
-        }
+    void Element::setUp() {
+        _elements.setUp();
+    }
 
-        for (auto& item : _itemsToRemove) {
-            item->setParent(nullptr);
-        }
+    void Element::update() {
+        _elements.update();
+    }
 
-        DeferredCollectionMixin::handlePendingItemsOperations();
+    void Element::tearDown() {
+        _elements.tearDown();
     }
 } // Gui

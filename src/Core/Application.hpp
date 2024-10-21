@@ -14,15 +14,14 @@
 #include "Modules/IModule.hpp"
 #include "Object.hpp"
 #include "Core/Lifecycle/ILifecycleAware.hpp"
-#include "Core/Lifecycle/DeferredCollectionMixin.hpp"
+#include "Core/Lifecycle/DeferredCollection.hpp"
 
 namespace Bibi::Core {
 
     /**
      * @brief La clase de la aplicación a ejecutar.
      */
-    class Application
-            : public Core::Lifecycle::DeferredCollectionMixin<Core::Lifecycle::ILifecycleAware, Modules::IModule> {
+    class Application : public virtual Lifecycle::ILifecycleAware {
     public:
         /**
          * Crea una instancia de Application.
@@ -31,6 +30,11 @@ namespace Bibi::Core {
         explicit Application(GLFWwindow *window);
 
     public:
+
+        /**
+         * Configura la aplicación y sus módulos.
+         */
+        void setUp() override;
 
         /**
          * Actualiza la aplicacion y sus modulos.
@@ -89,7 +93,7 @@ namespace Bibi::Core {
         template<typename TModule>
         requires std::derived_from<TModule, Modules::IModule>
         TModule *getModule() {
-            for (auto &module: _items) {
+            for (auto &module: _modules) {
                 if (auto value{dynamic_cast<TModule *>(module.get())}; value != nullptr) {
                     return value;
                 }
@@ -97,11 +101,11 @@ namespace Bibi::Core {
             return {};
         }
 
-    protected:
         /**
-         * Primero establece la aplicacion en los modulos y luego se utiliza la implementacion base.
+         * Obtiene la coleccion de modulos de la aplicacion.
+         * @return La coleccion de modulos de la aplicacion.
          */
-        void handlePendingItemsOperations() override;
+        Lifecycle::DeferredCollection<Modules::IModule>& getModules();
 
     private:
 
@@ -114,6 +118,7 @@ namespace Bibi::Core {
          * Los objetos de la aplicación.
          */
         std::vector<std::unique_ptr<Core::Object>> _objects;
+        Lifecycle::DeferredCollection<Modules::IModule> _modules;
     };
 
 } // Application

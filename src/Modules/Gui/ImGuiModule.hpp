@@ -10,7 +10,7 @@
 #include <spdlog/logger.h>
 #include "Modules/Logging/Logger.hpp"
 #include "Modules/Gui/IElement.hpp"
-#include "Core/Lifecycle/DeferredCollectionMixin.hpp"
+#include "Core/Lifecycle/DeferredCollection.hpp"
 
 namespace Bibi::Modules::Gui {
 
@@ -18,7 +18,7 @@ namespace Bibi::Modules::Gui {
      * Modulo que se encarga de la interfaz gráfica de usuario.
      * Realiza la inicialización y limpieza de ImGui y se encarga de la actualización de los elementos de la interfaz.
      */
-    class ImGuiModule : public Core::Lifecycle::DeferredCollectionMixin<IModule, IElement> {
+    class ImGuiModule : public virtual IModule {
     public:
         /**
          * Nombre del módulo.
@@ -50,7 +50,7 @@ namespace Bibi::Modules::Gui {
         template <typename TElement>
         requires std::derived_from<TElement, IElement>
         TElement* getElementByTag(const std::string& tag) {
-            for (auto& element : _items) {
+            for (auto& element : _elements) {
                 if (auto converted{ dynamic_cast<TElement*>(element.get()) }; element->getTag() == tag && converted != nullptr) {
                     return converted;
                 }
@@ -78,6 +78,11 @@ namespace Bibi::Modules::Gui {
          * Registra los elementos de la interfaz.
          */
         void registerElements();
+
+        /**
+         * Colección de elementos de la interfaz.
+         */
+        Core::Lifecycle::DeferredCollection<IElement> _elements{};
     };
 
 } // Modules

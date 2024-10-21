@@ -21,7 +21,7 @@ namespace Bibi::Modules::Gui {
      * @note Existe una implementacion base de esta clase llamada Element, la clase Element
      * debe ser utilizada como base para todos los elementos de la interfaz de usuario.
      */
-    class IElement : public Core::Lifecycle::ILifecycleAware {
+    class IElement : public virtual Core::Lifecycle::ILifecycleAware {
     public:
         ~IElement() override = default;
 

@@ -15,7 +15,7 @@ namespace Bibi::Core {
      * @brief Clase base para todos los objetos en el motor.
      * @note esta clase debe ser heredada por todas las clases que representen un objeto en el motor.
      */
-    class Object : public Core::Lifecycle::ILifecycleAware {
+    class Object : public virtual Core::Lifecycle::ILifecycleAware {
     public:
         ~Object() override = default;
 

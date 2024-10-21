@@ -16,7 +16,7 @@ namespace Bibi::Modules {
     /**
      * Interfaz para los módulos de la aplicación.
      */
-    class IModule : public Core::Lifecycle::ILifecycleAware {
+    class IModule : public virtual Core::Lifecycle::ILifecycleAware {
     public:
         ~IModule() override = default;
 

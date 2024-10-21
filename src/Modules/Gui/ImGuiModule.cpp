@@ -20,12 +20,11 @@ using namespace Bibi::Modules::Logging;
 
 namespace Bibi::Modules::Gui {
     const std::string ImGuiModule::name = "imgui";
-    using Base = Core::Lifecycle::DeferredCollectionMixin<IModule, IElement>;
 
     void ImGuiModule::setUp() {
         initializeImGui();
         registerElements();
-        Base::setUp();
+        _elements.setUp();
     }
 
     void ImGuiModule::update() {
@@ -33,7 +32,7 @@ namespace Bibi::Modules::Gui {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        Base::update();
+        _elements.update();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -42,7 +41,7 @@ namespace Bibi::Modules::Gui {
     void ImGuiModule::tearDown() {
         _logger->info("Tearing down imgui");
 
-        Base::tearDown();
+        _elements.tearDown();
 
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
@@ -69,17 +68,17 @@ namespace Bibi::Modules::Gui {
     void ImGuiModule::registerElements() {
         using namespace Bibi::Core::UI;
         auto mainMenuBar = std::make_unique<BibiMainMenuElement>(_application);
-        add(std::move(mainMenuBar));
+        _elements.add(std::move(mainMenuBar));
 
         auto aboutWindow{ std::make_unique<BibiAboutWindowElement>(_application) };
-        add(std::move(aboutWindow));
+        _elements.add(std::move(aboutWindow));
 
         auto subjectListWindow{ std::make_unique<ObjectListWindow>(_application) };
         subjectListWindow->setTag(ElementTag::WindowObjectList);
-        add(std::move(subjectListWindow));
+        _elements.add(std::move(subjectListWindow));
 
         auto inspectorWindow{ std::make_unique<InspectorWindow>(_application) };
         inspectorWindow->setTag(ElementTag::WindowInspector);
-        add(std::move(inspectorWindow));
+        _elements.add(std::move(inspectorWindow));
     }
 } // Modules

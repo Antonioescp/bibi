@@ -2,8 +2,8 @@
 // Created by packa on 21/10/2024.
 //
 
-#ifndef BIBI_DEFERREDCOLLECTIONMIXIN_HPP
-#define BIBI_DEFERREDCOLLECTIONMIXIN_HPP
+#ifndef BIBI_DEFERREDCOLLECTION_HPP
+#define BIBI_DEFERREDCOLLECTION_HPP
 
 #include <vector>
 #include <concepts>
@@ -18,22 +18,16 @@ namespace Bibi::Core::Lifecycle {
      * @note TItem debe implementar la interfaz ILifecycleAware.
      * @note Los objetos se añaden y eliminan en el siguiente ciclo de vida.
      */
-    template <typename TBase, typename TItem>
-    requires (std::derived_from<TBase, ILifecycleAware>
-                && std::derived_from<TItem, ILifecycleAware>)
-    class DeferredCollectionMixin : public TBase {
+    template <typename TItem>
+    requires std::derived_from<TItem, ILifecycleAware>
+    class DeferredCollection : public virtual ILifecycleAware {
     public:
-        using TBase::TBase;
-
         /**
          * Procesa las operaciones pendientes de agregar o remover un elemento de la colección
          * y ejecuta la operación de setUp en cada elemento de la colección.
          */
         void setUp() override {
             handlePendingItemsOperations();
-            if constexpr (Concepts::IsLifecycle<TBase>) {
-                TBase::setUp();
-            }
         }
 
         /**
@@ -45,10 +39,6 @@ namespace Bibi::Core::Lifecycle {
                 item->update();
             }
             handlePendingItemsOperations();
-
-            if constexpr (Concepts::IsLifecycle<TBase>) {
-                TBase::update();
-            }
         }
 
         /**
@@ -59,9 +49,6 @@ namespace Bibi::Core::Lifecycle {
             handlePendingItemsOperations();
             for (auto& item : _items) {
                 item->tearDown();
-            }
-            if constexpr (Concepts::IsLifecycle<TBase>) {
-                TBase::tearDown();
             }
         }
 
@@ -97,6 +84,14 @@ namespace Bibi::Core::Lifecycle {
          */
         auto end() {
             return _items.end();
+        }
+
+        const std::vector<std::unique_ptr<TItem>>& getPendingToAdd() const {
+            return _itemsToAdd;
+        }
+
+        const std::vector<TItem*>& getPendingToRemove() const {
+            return _itemsToRemove;
         }
 
     protected:
@@ -140,4 +135,4 @@ namespace Bibi::Core::Lifecycle {
 
 } // Lifecycle
 
-#endif //BIBI_DEFERREDCOLLECTIONMIXIN_HPP
+#endif //BIBI_DEFERREDCOLLECTION_HPP

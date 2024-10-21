@@ -6,8 +6,6 @@
 #include <ranges>
 
 namespace Bibi::Core {
-    using Base = Core::Lifecycle::DeferredCollectionMixin<Core::Lifecycle::ILifecycleAware, Modules::IModule>;
-
     Application::Application(GLFWwindow *window) {
         _mainWindow = window;
     }
@@ -48,20 +46,27 @@ namespace Bibi::Core {
         while (!glfwWindowShouldClose(_mainWindow)) {
             glfwPollEvents();
             glClear(GL_COLOR_BUFFER_BIT);
-            Base::update();
+
+            _modules.update();
+
             glfwSwapBuffers(_mainWindow);
         }
     }
 
     void Application::tearDown() {
-        Base::tearDown();
+        _modules.tearDown();
         glfwTerminate();
     }
 
-    void Application::handlePendingItemsOperations() {
-        for (auto& item : _itemsToAdd) {
-            item->setApplication(this);
+    void Application::setUp() {
+        for (auto& module: _modules.getPendingToAdd()) {
+            module->setApplication(this);
         }
-        Base::handlePendingItemsOperations();
+
+        _modules.setUp();
+    }
+
+    Lifecycle::DeferredCollection<Modules::IModule> &Application::getModules() {
+        return _modules;
     }
 } // Application
