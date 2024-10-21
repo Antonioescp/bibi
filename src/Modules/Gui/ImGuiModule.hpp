@@ -10,6 +10,7 @@
 #include <spdlog/logger.h>
 #include "Modules/Logging/Logger.hpp"
 #include "Modules/Gui/IElement.hpp"
+#include "Core/Lifecycle/DeferredCollection.hpp"
 
 namespace Bibi::Modules::Gui {
 
@@ -17,7 +18,7 @@ namespace Bibi::Modules::Gui {
      * Modulo que se encarga de la interfaz gráfica de usuario.
      * Realiza la inicialización y limpieza de ImGui y se encarga de la actualización de los elementos de la interfaz.
      */
-    class ImGuiModule : public IModule {
+    class ImGuiModule : public Core::Lifecycle::DeferredCollection<IModule, IElement> {
     public:
         /**
          * Nombre del módulo.
@@ -41,18 +42,6 @@ namespace Bibi::Modules::Gui {
         void tearDown() override;
 
         /**
-         * Añade un elemento a la interfaz.
-         * @param element
-         */
-        void addElement(std::unique_ptr<IElement> element);
-
-        /**
-         * Devuelve los elementos de la interfaz.
-         * @return Todos los elementos de la interfaz.
-         */
-        auto getElements();
-
-        /**
          * Devuelve un elemento de la interfaz por su tag.
          * @tparam TElement El tipo de elemento que se desea obtener.
          * @param tag El tag del elemento que se desea obtener.
@@ -61,7 +50,7 @@ namespace Bibi::Modules::Gui {
         template <typename TElement>
         requires std::derived_from<TElement, IElement>
         TElement* getElementByTag(const std::string& tag) {
-            for (auto& element : s_elements) {
+            for (auto& element : _items) {
                 if (auto converted{ dynamic_cast<TElement*>(element.get()) }; element->getTag() == tag && converted != nullptr) {
                     return converted;
                 }
@@ -79,11 +68,6 @@ namespace Bibi::Modules::Gui {
          * Logger del módulo.
          */
         std::shared_ptr<spdlog::logger> _logger{};
-
-        /**
-         * Elementos de la interfaz.
-         */
-        std::vector<std::unique_ptr<IElement>> s_elements{};
 
         /**
          * Realiza la inicialización de ImGui.

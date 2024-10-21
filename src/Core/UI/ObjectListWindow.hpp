@@ -11,6 +11,7 @@
 #include "Modules/Gui/Element.hpp"
 #include "Modules/Gui/Elements/TreeNodeElement.hpp"
 #include "Modules/Gui/Elements/WindowElement.hpp"
+#include "Modules/Gui/ElementCollection.hpp"
 
 namespace Bibi::Core::UI {
 

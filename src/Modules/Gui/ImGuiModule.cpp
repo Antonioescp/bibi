@@ -20,14 +20,12 @@ using namespace Bibi::Modules::Logging;
 
 namespace Bibi::Modules::Gui {
     const std::string ImGuiModule::name = "imgui";
+    using Base = Core::Lifecycle::DeferredCollection<IModule, IElement>;
 
     void ImGuiModule::setUp() {
         initializeImGui();
         registerElements();
-
-        for (auto& element : s_elements) {
-            element->setUp();
-        }
+        Base::setUp();
     }
 
     void ImGuiModule::update() {
@@ -35,9 +33,7 @@ namespace Bibi::Modules::Gui {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        for (auto& element : s_elements) {
-            element->update();
-        }
+        Base::update();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -46,18 +42,12 @@ namespace Bibi::Modules::Gui {
     void ImGuiModule::tearDown() {
         _logger->info("Tearing down imgui");
 
-        for (auto& element : s_elements | std::views::reverse) {
-            element->tearDown();
-        }
+        Base::tearDown();
 
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
         _logger->info("imgui teardown complete");
-    }
-
-    void ImGuiModule::addElement(std::unique_ptr<IElement> element) {
-        s_elements.push_back(std::move(element));
     }
 
     void ImGuiModule::initializeImGui() {
@@ -79,23 +69,17 @@ namespace Bibi::Modules::Gui {
     void ImGuiModule::registerElements() {
         using namespace Bibi::Core::UI;
         auto mainMenuBar = std::make_unique<BibiMainMenuElement>(_application);
-        addElement(std::move(mainMenuBar));
+        add(std::move(mainMenuBar));
 
         auto aboutWindow{ std::make_unique<BibiAboutWindowElement>(_application) };
-        addElement(std::move(aboutWindow));
+        add(std::move(aboutWindow));
 
         auto subjectListWindow{ std::make_unique<ObjectListWindow>(_application) };
         subjectListWindow->setTag(ElementTag::WindowObjectList);
-        addElement(std::move(subjectListWindow));
+        add(std::move(subjectListWindow));
 
         auto inspectorWindow{ std::make_unique<InspectorWindow>(_application) };
         inspectorWindow->setTag(ElementTag::WindowInspector);
-        addElement(std::move(inspectorWindow));
-    }
-
-    auto ImGuiModule::getElements() {
-        return s_elements | std::views::transform([](const auto& element) {
-            return element.get();
-        });
+        add(std::move(inspectorWindow));
     }
 } // Modules
