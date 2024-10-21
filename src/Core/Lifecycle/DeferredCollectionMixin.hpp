@@ -2,8 +2,8 @@
 // Created by packa on 21/10/2024.
 //
 
-#ifndef BIBI_DEFERREDCOLLECTION_HPP
-#define BIBI_DEFERREDCOLLECTION_HPP
+#ifndef BIBI_DEFERREDCOLLECTIONMIXIN_HPP
+#define BIBI_DEFERREDCOLLECTIONMIXIN_HPP
 
 #include <vector>
 #include <concepts>
@@ -21,7 +21,7 @@ namespace Bibi::Core::Lifecycle {
     template <typename TBase, typename TItem>
     requires (std::derived_from<TBase, ILifecycleAware>
                 && std::derived_from<TItem, ILifecycleAware>)
-    class DeferredCollection : public TBase {
+    class DeferredCollectionMixin : public TBase {
     public:
         using TBase::TBase;
 
@@ -139,4 +139,4 @@ namespace Bibi::Core::Lifecycle {
 
 } // Lifecycle
 
-#endif //BIBI_DEFERREDCOLLECTION_HPP
+#endif //BIBI_DEFERREDCOLLECTIONMIXIN_HPP

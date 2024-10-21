@@ -20,7 +20,7 @@ using namespace Bibi::Modules::Logging;
 
 namespace Bibi::Modules::Gui {
     const std::string ImGuiModule::name = "imgui";
-    using Base = Core::Lifecycle::DeferredCollection<IModule, IElement>;
+    using Base = Core::Lifecycle::DeferredCollectionMixin<IModule, IElement>;
 
     void ImGuiModule::setUp() {
         initializeImGui();

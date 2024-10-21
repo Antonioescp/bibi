@@ -11,11 +11,11 @@
 
 #include "IElement.hpp"
 #include "Core/Application.hpp"
-#include "Core/Lifecycle/DeferredCollection.hpp"
+#include "Core/Lifecycle/DeferredCollectionMixin.hpp"
 
 namespace Bibi::Modules::Gui {
 
-    class Element : public Core::Lifecycle::DeferredCollection<IElement, IElement> {
+    class Element : public Core::Lifecycle::DeferredCollectionMixin<IElement, IElement> {
     public:
         ~Element() override = default;
 

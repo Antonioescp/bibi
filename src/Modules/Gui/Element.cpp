@@ -5,7 +5,7 @@
 #include "Element.hpp"
 
 namespace Bibi::Modules::Gui {
-    using Base = Core::Lifecycle::DeferredCollection<IElement, IElement>;
+    using Base = Core::Lifecycle::DeferredCollectionMixin<IElement, IElement>;
 
     Element::Element(Core::Application *application) : _application{application} {}
 
@@ -57,6 +57,6 @@ namespace Bibi::Modules::Gui {
             item->setParent(nullptr);
         }
 
-        DeferredCollection::handlePendingItemsOperations();
+        DeferredCollectionMixin::handlePendingItemsOperations();
     }
 } // Gui

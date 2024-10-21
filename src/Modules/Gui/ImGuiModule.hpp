@@ -10,7 +10,7 @@
 #include <spdlog/logger.h>
 #include "Modules/Logging/Logger.hpp"
 #include "Modules/Gui/IElement.hpp"
-#include "Core/Lifecycle/DeferredCollection.hpp"
+#include "Core/Lifecycle/DeferredCollectionMixin.hpp"
 
 namespace Bibi::Modules::Gui {
 
@@ -18,7 +18,7 @@ namespace Bibi::Modules::Gui {
      * Modulo que se encarga de la interfaz gráfica de usuario.
      * Realiza la inicialización y limpieza de ImGui y se encarga de la actualización de los elementos de la interfaz.
      */
-    class ImGuiModule : public Core::Lifecycle::DeferredCollection<IModule, IElement> {
+    class ImGuiModule : public Core::Lifecycle::DeferredCollectionMixin<IModule, IElement> {
     public:
         /**
          * Nombre del módulo.
