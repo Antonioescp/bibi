@@ -48,8 +48,7 @@ namespace Bibi::Core {
         Application app{ window };
 
         for (auto& module: _modules) {
-            module->setApplication(&app);
-            app.addModule(std::move(module));
+            app.add(std::move(module));
         }
 
         _modules.clear();

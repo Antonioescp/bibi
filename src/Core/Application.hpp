@@ -14,31 +14,23 @@
 #include "Modules/IModule.hpp"
 #include "Object.hpp"
 #include "Core/Lifecycle/ILifecycleAware.hpp"
+#include "Core/Lifecycle/DeferredCollectionMixin.hpp"
 
 namespace Bibi::Core {
 
     /**
      * @brief La clase de la aplicación a ejecutar.
      */
-    class Application : public Lifecycle::ILifecycleAware {
+    class Application
+            : public Core::Lifecycle::DeferredCollectionMixin<Core::Lifecycle::ILifecycleAware, Modules::IModule> {
     public:
         /**
          * Crea una instancia de Application.
          * @param window La ventana principal (GLFW).
          */
-        explicit Application(GLFWwindow* window);
+        explicit Application(GLFWwindow *window);
 
-        /**
-         * Agrega un modulo para que sea ejecutado por la aplicación.
-         * @param module El modulo a ejecutar.
-         */
-        void addModule(std::unique_ptr<Modules::IModule> module);
-
-        /**
-         * Configura la aplicación y los módulos.
-         * @note Este método se llama una sola vez antes del primer frame.
-         */
-        void setUp() override;
+    public:
 
         /**
          * Actualiza la aplicacion y sus modulos.
@@ -61,7 +53,7 @@ namespace Bibi::Core {
          * Obtiene la ventana principal.
          * @return La ventana principal.
          */
-        [[nodiscard]] GLFWwindow* getMainWindow() { return _mainWindow; }
+        [[nodiscard]] GLFWwindow *getMainWindow() { return _mainWindow; }
 
         /**
          * Obtiene los objetos de la aplicación.
@@ -69,18 +61,13 @@ namespace Bibi::Core {
          * @note Los objetos se actualizan y dibujan en el orden en que se agregaron.
          * @return Los objetos de la aplicación.
          */
-        [[nodiscard]] const std::vector<std::unique_ptr<Core::Object>>& getObjects() const;
+        [[nodiscard]] const std::vector<std::unique_ptr<Core::Object>> &getObjects() const;
 
         /**
          * Obtiene los objetos raíz de la aplicación, es decir, los objetos sin padre.
          * @return Los objetos sin padre de la aplicación.
          */
-        [[nodiscard]] std::vector<Core::Object*> getRootObjects() const;
-
-        /**
-         * Elimina todos los objetos de la aplicación.
-         */
-        void clearObjects();
+        [[nodiscard]] std::vector<Core::Object *> getRootObjects() const;
 
         /**
          * Agrega un objeto a la aplicación.
@@ -92,40 +79,41 @@ namespace Bibi::Core {
          * Elimina un objeto de la aplicación.
          * @param object El objeto a eliminar.
          */
-        void removeObject(const Core::Object* object);
+        void removeObject(const Core::Object *object);
 
         /**
          * Obtiene un módulo de la aplicación.
          * @tparam TModule El tipo de módulo a obtener.
          * @return El módulo si existe, de lo contrario, nullptr.
          */
-        template <typename TModule>
+        template<typename TModule>
         requires std::derived_from<TModule, Modules::IModule>
-        TModule* getModule() {
-            for (auto& module : _modules) {
-                if (auto value{ dynamic_cast<TModule*>(module.get()) }; value != nullptr) {
+        TModule *getModule() {
+            for (auto &module: _items) {
+                if (auto value{dynamic_cast<TModule *>(module.get())}; value != nullptr) {
                     return value;
                 }
             }
             return {};
         }
 
+    protected:
+        /**
+         * Primero establece la aplicacion en los modulos y luego se utiliza la implementacion base.
+         */
+        void handlePendingItemsOperations() override;
+
     private:
 
         /**
          * La ventana principal de la aplicación.
          */
-        GLFWwindow* _mainWindow;
+        GLFWwindow *_mainWindow;
 
         /**
          * Los objetos de la aplicación.
          */
         std::vector<std::unique_ptr<Core::Object>> _objects;
-
-        /**
-         * Los módulos de la aplicación.
-         */
-        std::vector<std::unique_ptr<Modules::IModule>> _modules;
     };
 
 } // Application

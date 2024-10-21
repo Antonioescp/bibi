@@ -121,8 +121,9 @@ namespace Bibi::Core::Lifecycle {
          */
         virtual void handlePendingItemsOperations() {
             for (auto& item : _itemsToAdd) {
-                item->setUp();
+                auto itemPtr = item.get();
                 _items.push_back(std::move(item));
+                itemPtr->setUp();
             }
             _itemsToAdd.clear();
 

@@ -6,18 +6,10 @@
 #include <ranges>
 
 namespace Bibi::Core {
+    using Base = Core::Lifecycle::DeferredCollectionMixin<Core::Lifecycle::ILifecycleAware, Modules::IModule>;
+
     Application::Application(GLFWwindow *window) {
         _mainWindow = window;
-    }
-
-    void Application::addModule(std::unique_ptr<Modules::IModule> module) {
-        _modules.push_back(std::move(module));
-    }
-
-    void Application::setUp() {
-        for (auto& module : _modules) {
-            module->setUp();
-        }
     }
 
     void Application::run() {
@@ -27,10 +19,6 @@ namespace Bibi::Core {
 
     const std::vector<std::unique_ptr<Core::Object>> &Application::getObjects() const {
         return _objects;
-    }
-
-    void Application::clearObjects() {
-        _objects.clear();
     }
 
     void Application::addObject(std::unique_ptr<Core::Object> object) {
@@ -60,20 +48,20 @@ namespace Bibi::Core {
         while (!glfwWindowShouldClose(_mainWindow)) {
             glfwPollEvents();
             glClear(GL_COLOR_BUFFER_BIT);
-            for (auto& module : _modules) {
-                module->update();
-            }
-
+            Base::update();
             glfwSwapBuffers(_mainWindow);
         }
     }
 
     void Application::tearDown() {
-        auto reversedModules = std::ranges::views::reverse(_modules);
-        for (auto& module : reversedModules) {
-            module->tearDown();
-        }
-
+        Base::tearDown();
         glfwTerminate();
+    }
+
+    void Application::handlePendingItemsOperations() {
+        for (auto& item : _itemsToAdd) {
+            item->setApplication(this);
+        }
+        Base::handlePendingItemsOperations();
     }
 } // Application
