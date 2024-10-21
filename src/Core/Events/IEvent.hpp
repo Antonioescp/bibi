@@ -10,6 +10,11 @@
 
 namespace Bibi::Core::Events {
 
+    /**
+     * @brief Interfaz para un evento.
+     * @tparam TArguments Los argumentos del evento.
+     * @note Los argumentos definen el invocable que puede ser aceptado por el evento.
+     */
     template <class... TArguments>
     class IEvent : public IEventSubscriber<TArguments...>, public IEventPublisher<TArguments...> {
     public:

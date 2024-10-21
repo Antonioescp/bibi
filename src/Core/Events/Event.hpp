@@ -10,6 +10,10 @@
 
 namespace Bibi::Core::Events {
 
+    /**
+     * Clase para crear un evento.
+     * @tparam TArguments Argumentos que se pasan al evento.
+     */
     template<class... TArguments>
     class Event : public IEvent<TArguments...> {
     public:
@@ -38,6 +42,7 @@ namespace Bibi::Core::Events {
         }
 
     private:
+        // Colección de callbacks a realizar cuando se dispare el evento.
         std::vector<Function<TArguments...>> _callbacks;
     };
 
