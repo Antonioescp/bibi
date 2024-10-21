@@ -5,7 +5,6 @@
 #include <stdexcept>
 #include <iostream>
 #include "OpenGLApplicationBuilder.hpp"
-#include "Modules/IModuleConfigurable.hpp"
 
 namespace Bibi::Core {
     IApplicationBuilder& OpenGLApplicationBuilder::setDimensions(int width, int height) {
@@ -54,6 +53,8 @@ namespace Bibi::Core {
         }
 
         _modules.clear();
+
+        app.setUp();
 
         return app;
     }

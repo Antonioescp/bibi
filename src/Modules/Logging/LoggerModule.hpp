@@ -5,13 +5,21 @@
 #ifndef BIBI_LOGGERMODULE_HPP
 #define BIBI_LOGGERMODULE_HPP
 
-#include "Modules/IModuleConfigurable.hpp"
-#include "Modules/IModuleDeconstructable.hpp"
+#include "Modules/IModule.hpp"
 
 namespace Bibi::Modules::Logging {
 
-    class LoggerModule : public IModuleConfigurable {
+    /**
+     * Módulo de logging, se encarga de inicializar el logger principal de la aplicación.
+     */
+    class LoggerModule : public IModule {
     public:
+        LoggerModule() = default;
+
+        /**
+         * Crea el logger "core", es el principal de la aplicación y el que se debe utilizar
+         * para logs generales.
+         */
         void setUp() override;
     };
 

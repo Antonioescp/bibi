@@ -12,14 +12,15 @@
 #include <GLFW/glfw3.h>
 
 #include "Modules/IModule.hpp"
-#include "Modules/IModuleConfigurable.hpp"
-#include "Modules/IModuleDeconstructable.hpp"
-#include "Modules/IModuleRunnable.hpp"
 #include "Object.hpp"
+#include "Core/Lifecycle/ILifecycleAware.hpp"
 
 namespace Bibi::Core {
 
-    class Application {
+    /**
+     * @brief La clase de la aplicación a ejecutar.
+     */
+    class Application : public Lifecycle::ILifecycleAware {
     public:
         explicit Application(GLFWwindow* window);
         void addModule(std::unique_ptr<Modules::IModule> module);

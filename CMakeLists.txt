@@ -9,7 +9,6 @@ add_executable(bibi main.cpp
         src/Core/IApplicationBuilder.hpp
         src/Core/OpenGLApplicationBuilder.cpp
         src/Core/OpenGLApplicationBuilder.hpp
-        src/Modules/IModuleConfigurable.hpp
         src/Modules/IModule.hpp
         src/Modules/Gui/ImGuiModule.cpp
         src/Modules/Gui/ImGuiModule.hpp
@@ -17,8 +16,6 @@ add_executable(bibi main.cpp
         src/Modules/Logging/LoggerModule.hpp
         src/Modules/Logging/Logger.cpp
         src/Modules/Logging/Logger.hpp
-        src/Modules/IModuleDeconstructable.hpp
-        src/Modules/IModuleRunnable.hpp
         src/Modules/Gui/IElement.hpp
         src/Modules/Gui/Elements/MainMenuBarElement.cpp
         src/Modules/Gui/Elements/MainMenuBarElement.hpp
@@ -53,6 +50,11 @@ add_executable(bibi main.cpp
         src/Modules/Gui/Elements/TreeNodeElement.hpp
         src/Modules/Gui/Elements/ButtonElement.cpp
         src/Modules/Gui/Elements/ButtonElement.hpp
+        src/Core/UI/InspectorWindow.cpp
+        src/Core/UI/InspectorWindow.hpp
+        src/Core/Component.cpp
+        src/Core/Component.hpp
+        src/Core/Lifecycle/ILifecycleAware.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

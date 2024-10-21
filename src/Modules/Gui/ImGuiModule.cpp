@@ -30,7 +30,7 @@ namespace Bibi::Modules::Gui {
         }
     }
 
-    void ImGuiModule::run() {
+    void ImGuiModule::update() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();

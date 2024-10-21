@@ -14,12 +14,9 @@
 #include "Core/Application.hpp"
 
 namespace Bibi::Modules::Gui {
-    class IElement {
+class IElement : public Core::Lifecycle::ILifecycleAware {
     public:
-        virtual ~IElement() = default;
-        virtual void update() = 0;
-        virtual void setUp() = 0;
-        virtual void tearDown() = 0;
+        ~IElement() override = default;
         virtual void addElement(std::unique_ptr<IElement> element) = 0;
         virtual void removeElement(IElement* element) = 0;
         virtual void removeElements(std::string tag) = 0;

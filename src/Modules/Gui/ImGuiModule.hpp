@@ -9,19 +9,16 @@
 #include <span>
 #include <spdlog/logger.h>
 #include "Modules/Logging/Logger.hpp"
-#include "Modules/IModuleConfigurable.hpp"
-#include "Modules/IModuleDeconstructable.hpp"
-#include "Modules/IModuleRunnable.hpp"
 #include "Modules/Gui/IElement.hpp"
 
 namespace Bibi::Modules::Gui {
 
-    class ImGuiModule : public IModuleConfigurable, public IModuleRunnable, public IModuleDeconstructable {
+    class ImGuiModule : public IModule {
     public:
         static const std::string name;
 
         void setUp() override;
-        void run() override;
+        void update() override;
         void tearDown() override;
         void addElement(std::unique_ptr<IElement> element);
         auto getElements();

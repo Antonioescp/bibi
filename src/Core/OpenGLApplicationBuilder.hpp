@@ -9,9 +9,6 @@
 #include <GLFW/glfw3.h>
 
 #include "IApplicationBuilder.hpp"
-#include "Modules/IModuleConfigurable.hpp"
-#include "Modules/IModuleDeconstructable.hpp"
-#include "Modules/IModuleRunnable.hpp"
 
 namespace Bibi::Core {
 

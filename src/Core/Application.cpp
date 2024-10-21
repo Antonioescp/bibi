@@ -11,49 +11,18 @@ namespace Bibi::Core {
     }
 
     void Application::addModule(std::unique_ptr<Modules::IModule> module) {
-        auto configurableModule{ dynamic_cast<Modules::IModuleConfigurable*>(module.get()) };
-        if (configurableModule != nullptr) {
-            _configurableModules.push_back(configurableModule);
-        }
-
-        auto deconstructableModule{ dynamic_cast<Modules::IModuleDeconstructable*>(module.get()) };
-        if (deconstructableModule != nullptr) {
-            _deconstructableModules.push_back(deconstructableModule);
-        }
-
-        auto runnableModule{ dynamic_cast<Modules::IModuleRunnable*>(module.get()) };
-        if (runnableModule != nullptr) {
-            _runnableModules.push_back(runnableModule);
-        }
-
         _modules.push_back(std::move(module));
     }
 
     void Application::setUp() {
-        for (auto module : _configurableModules) {
+        for (auto& module : _modules) {
             module->setUp();
         }
     }
 
     void Application::run() {
-        this->setUp();
-
-        while (!glfwWindowShouldClose(_mainWindow)) {
-            glfwPollEvents();
-            glClear(GL_COLOR_BUFFER_BIT);
-            for (auto& module : _runnableModules) {
-                module->run();
-            }
-
-            glfwSwapBuffers(_mainWindow);
-        }
-
-        auto reversedModules = std::ranges::views::reverse(_deconstructableModules);
-        for (auto module : reversedModules) {
-            module->tearDown();
-        }
-
-        glfwTerminate();
+        this->update();
+        this->tearDown();
     }
 
     const std::vector<std::unique_ptr<Core::Object>> &Application::getObjects() const {
@@ -85,5 +54,26 @@ namespace Bibi::Core {
         }
 
         return rootObjects;
+    }
+
+    void Application::update() {
+        while (!glfwWindowShouldClose(_mainWindow)) {
+            glfwPollEvents();
+            glClear(GL_COLOR_BUFFER_BIT);
+            for (auto& module : _modules) {
+                module->update();
+            }
+
+            glfwSwapBuffers(_mainWindow);
+        }
+    }
+
+    void Application::tearDown() {
+        auto reversedModules = std::ranges::views::reverse(_modules);
+        for (auto& module : reversedModules) {
+            module->tearDown();
+        }
+
+        glfwTerminate();
     }
 } // Application
