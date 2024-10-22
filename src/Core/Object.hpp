@@ -7,7 +7,9 @@
 
 #include <string>
 #include <vector>
+#include "Core/Lifecycle/DeferredCollection.hpp"
 #include "Core/Lifecycle/ILifecycleAware.hpp"
+#include "Core/Component.hpp"
 
 namespace Bibi::Core {
 
@@ -81,6 +83,28 @@ namespace Bibi::Core {
          */
         void clearChildren();
 
+        /**
+         * @brief Obtiene todos los componentes del objeto.
+         * @return Colección de componentes del objeto.
+         */
+         [[nodiscard]] Core::Lifecycle::DeferredCollection<Component>& getComponents();
+
+        /**
+         * @brief Obtiene un componente del objeto.
+         * @tparam TComponent Tipo del componente.
+         * @return El componente del objeto.
+         */
+         template<typename TComponent>
+         TComponent* getComponent() {
+            for (auto& component : _components) {
+                if (auto* c = dynamic_cast<TComponent*>(component)) {
+                    return c;
+                }
+            }
+
+            return {};
+         }
+
     protected:
         /**
          * @brief Etiqueta del objeto.
@@ -96,6 +120,11 @@ namespace Bibi::Core {
          * @brief Colección de hijos del objeto.
          */
         std::vector<Object*> _children;
+
+        /**
+         * @brief Colección de componentes del objeto.
+         */
+        Core::Lifecycle::DeferredCollection<Component> _components;
     };
 
 } // Core

@@ -3,6 +3,10 @@
 //
 
 #include "Component.hpp"
+#include "Object.hpp"
 
 namespace Bibi::Core {
+    Component::Component(Object &object) : _object{object} {
+
+    }
 } // Core

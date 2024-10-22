@@ -50,4 +50,8 @@ namespace Bibi::Core {
     void Object::tearDown() {
 
     }
+
+    Core::Lifecycle::DeferredCollection<Component> &Object::getComponents() {
+        return _components;
+    }
 } // Core

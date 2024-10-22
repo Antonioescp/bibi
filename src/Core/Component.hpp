@@ -5,12 +5,21 @@
 #ifndef BIBI_COMPONENT_HPP
 #define BIBI_COMPONENT_HPP
 
+#include "Core/Lifecycle/ILifecycleAware.hpp"
+
+namespace Bibi::Core {
+    class Object;
+}
+
 namespace Bibi::Core {
 
-    class Component {
+    class Component : public virtual Lifecycle::ILifecycleAware {
     public:
-        Component() = default;
-        virtual ~Component() = default;
+        explicit Component(Object &object);
+        ~Component() override = default;
+
+    protected:
+        Object &_object;
     };
 
 } // Core
