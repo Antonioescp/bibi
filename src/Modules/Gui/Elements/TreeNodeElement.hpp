@@ -15,16 +15,17 @@
 namespace Bibi::Modules::Gui::inline Elements {
     class TreeNodeElement : public Element {
     public:
-        Core::Events::Event<const std::string&> clickEvent;
-
         TreeNodeElement(Core::Application* application, std::string name);
         void update() override;
 
         [[nodiscard]] const std::string& getName() const;
         void setName(std::string name);
 
+        Core::Events::IEventSubscriber<const std::string&>& getClickEvent();
+
     protected:
         std::string _name;
+        Core::Events::Event<const std::string&> _clickEvent;
     };
 } // Elements
 

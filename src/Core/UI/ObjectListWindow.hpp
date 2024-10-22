@@ -16,16 +16,17 @@ namespace Bibi::Core::UI {
 
     class ObjectListWindow : public virtual Modules::Gui::Element {
     public:
-        Events::Event<Core::Object&> objectSelectedEvent{};
 
         using Modules::Gui::Element::Element;
         ObjectListWindow(Core::Application* application, const std::vector<Core::Object*>& objects);
         void setUp() override;
 
-    protected:
-        std::vector<Core::Object*> _objects;
+        [[nodiscard]] Core::Events::IEventSubscriber<Core::Object&>& getObjectSelectedEvent();
 
     private:
+        std::vector<Core::Object*> _objects;
+        Events::Event<Core::Object&> _objectSelectedEvent{};
+
         void buildTree(Modules::Gui::WindowElement* window);
         std::unique_ptr<Modules::Gui::TreeNodeElement> buildObjectTree(Core::Object* object);
     };

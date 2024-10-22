@@ -15,7 +15,7 @@ namespace Bibi::Core::Events {
      * @tparam TArguments Argumentos que se pasan al evento.
      */
     template<class... TArguments>
-    class Event : public IEvent<TArguments...> {
+    class Event : public virtual IEvent<TArguments...> {
     public:
         Event() = default;
 

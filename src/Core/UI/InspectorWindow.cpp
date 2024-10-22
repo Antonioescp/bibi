@@ -30,7 +30,7 @@ namespace Bibi::Core::UI {
 
         // Listening for object inspection from object list window
         auto objectListWindow{ui->getElementByTag<ObjectListWindow>(ElementTag::WindowObjectList)};
-        objectListWindow->objectSelectedEvent.subscribe([](const Core::Object& object) {
+        objectListWindow->getObjectSelectedEvent().subscribe([](const Core::Object& object) {
             auto logger{ Logger::get("core") };
             logger->info("Object selected: {}", object.getTag());
         });

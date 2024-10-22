@@ -16,7 +16,7 @@ namespace Bibi::Core::Events {
      * @note Los argumentos definen el invocable que puede ser aceptado por el evento.
      */
     template <class... TArguments>
-    class IEvent : public IEventSubscriber<TArguments...>, public IEventPublisher<TArguments...> {
+    class IEvent : public virtual IEventSubscriber<TArguments...>, public virtual IEventPublisher<TArguments...> {
     public:
         virtual ~IEvent() = default;
     };
