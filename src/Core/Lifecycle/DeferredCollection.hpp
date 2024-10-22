@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <concepts>
+#include <memory>
 #include "ILifecycleAware.hpp"
 #include "Core/Concepts/Lifecycle.hpp"
 
