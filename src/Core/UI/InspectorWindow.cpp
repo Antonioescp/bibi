@@ -11,6 +11,8 @@
 #include "ElementTag.hpp"
 #include "ObjectListWindow.hpp"
 #include "Modules/Logging/Logger.hpp"
+#include "Modules/Gui/Elements/TextElement.hpp"
+#include "Components/NameComponent.hpp"
 
 namespace Bibi::Core::UI {
 
@@ -30,9 +32,11 @@ namespace Bibi::Core::UI {
 
         // Listening for object inspection from object list window
         auto objectListWindow{ui->getElementByTag<ObjectListWindow>(ElementTag::WindowObjectList)};
-        objectListWindow->objectSelectedEvent.subscribe([](const Core::Object& object) {
-            auto logger{ Logger::get("core") };
-            logger->info("Object selected: {}", object.getTag());
+        objectListWindow->objectSelectedEvent.subscribe([inspectorWindow = window.get()](Core::Object &object) {
+            inspectorWindow->getElements().clear();
+            for (auto &component : object.getComponents()) {
+                inspectorWindow->getElements().add(component->serializeToElement());
+            }
         });
 
         // Adding the window

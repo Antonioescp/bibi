@@ -3,6 +3,18 @@
 //
 
 #include "Component.hpp"
+#include "Object.hpp"
 
 namespace Bibi::Core {
+    Component::Component(Object &object) : _object{object} {
+
+    }
+
+    std::string Component::getTag() const {
+        return _tag;
+    }
+
+    void Component::setTag(std::string tag) {
+        _tag = std::move(tag);
+    }
 } // Core

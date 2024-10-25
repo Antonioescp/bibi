@@ -29,9 +29,17 @@ namespace Bibi::Modules::Logging {
 
             spdlog::sinks_init_list sinks{consoleSink, dailySink};
             auto logger{createLogger(_coreLogName, sinks)};
+
+#ifdef DEBUG_BUILD
+            logger->set_level(spdlog::level::trace);
+#else
+            logger->set_level(spdlog::level::info);
+#endif
+
             spdlog::set_default_logger(logger);
 
             spdlog::info("Logger initialized");
+            spdlog::debug("debug mode enabled");
 
             _initialized = true;
         }

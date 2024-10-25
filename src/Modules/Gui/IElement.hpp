@@ -12,7 +12,11 @@
 #define GLFW_INCLUDE_NONE
 
 #include <GLFW/glfw3.h>
-#include "Core/Application.hpp"
+#include "Core/Lifecycle/ILifecycleAware.hpp"
+
+namespace Bibi::Core {
+    class Application;
+}
 
 namespace Bibi::Modules::Gui {
 

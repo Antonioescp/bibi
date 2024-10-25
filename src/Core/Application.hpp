@@ -11,8 +11,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "Modules/IModule.hpp"
 #include "Object.hpp"
+#include "Modules/IModule.hpp"
 #include "Core/Lifecycle/ILifecycleAware.hpp"
 #include "Core/Lifecycle/DeferredCollection.hpp"
 
@@ -65,25 +65,13 @@ namespace Bibi::Core {
          * @note Los objetos se actualizan y dibujan en el orden en que se agregaron.
          * @return Los objetos de la aplicación.
          */
-        [[nodiscard]] const std::vector<std::unique_ptr<Core::Object>> &getObjects() const;
+        [[nodiscard]] Lifecycle::DeferredCollection<Object> &getObjects();
 
         /**
          * Obtiene los objetos raíz de la aplicación, es decir, los objetos sin padre.
          * @return Los objetos sin padre de la aplicación.
          */
-        [[nodiscard]] std::vector<Core::Object *> getRootObjects() const;
-
-        /**
-         * Agrega un objeto a la aplicación.
-         * @param object El objeto a agregar.
-         */
-        void addObject(std::unique_ptr<Core::Object> object);
-
-        /**
-         * Elimina un objeto de la aplicación.
-         * @param object El objeto a eliminar.
-         */
-        void removeObject(const Core::Object *object);
+        [[nodiscard]] std::vector<Object *> getRootObjects();
 
         /**
          * Obtiene un módulo de la aplicación.
@@ -105,7 +93,7 @@ namespace Bibi::Core {
          * Obtiene la coleccion de modulos de la aplicacion.
          * @return La coleccion de modulos de la aplicacion.
          */
-        Lifecycle::DeferredCollection<Modules::IModule>& getModules();
+        [[nodiscard]] Lifecycle::DeferredCollection<Modules::IModule> &getModules();
 
     private:
 
@@ -117,7 +105,7 @@ namespace Bibi::Core {
         /**
          * Los objetos de la aplicación.
          */
-        std::vector<std::unique_ptr<Core::Object>> _objects;
+        Lifecycle::DeferredCollection<Core::Object> _objects;
         Lifecycle::DeferredCollection<Modules::IModule> _modules;
     };
 
