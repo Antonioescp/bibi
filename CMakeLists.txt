@@ -83,3 +83,7 @@ set(DEST_DIR "${CMAKE_BINARY_DIR}")
 
 # Copy the directory from source to bin
 file(COPY ${SOURCE_DIR} DESTINATION ${DEST_DIR})
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DDEBUG_BUILD)
+endif()
