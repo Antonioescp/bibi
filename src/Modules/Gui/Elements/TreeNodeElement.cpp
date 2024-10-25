@@ -20,7 +20,7 @@ void TreeNodeElement::update() {
     auto shouldRender{ ImGui::TreeNode(_name.c_str()) };
 
     if (ImGui::IsItemClicked()) {
-        clickEvent.trigger(_name);
+        _clickEvent.trigger(_name);
     }
 
     if (shouldRender) {
@@ -32,6 +32,10 @@ void TreeNodeElement::update() {
 TreeNodeElement::TreeNodeElement(Core::Application *application, std::string name) : Element(application),
                                                                                      _name(std::move(name)) {
 
+}
+
+Core::Events::IEventSubscriber<const std::string &> &TreeNodeElement::getClickEvent() {
+    return _clickEvent;
 }
 
 } // Elements

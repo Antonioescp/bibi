@@ -65,8 +65,8 @@ namespace Bibi::Core::UI {
         for (auto child : object->getChildren()) {
             auto childTreeNode{ this->buildObjectTree(child) };
 
-            childTreeNode->clickEvent.subscribe([this, obj = child] (auto& name) {
-                objectSelectedEvent.trigger(*obj);
+            childTreeNode->getClickEvent().subscribe([this, obj = child] (auto& name) {
+                _objectSelectedEvent.trigger(*obj);
             });
 
             treeNode->getElements().add(std::move(childTreeNode));
@@ -79,11 +79,15 @@ namespace Bibi::Core::UI {
         for (auto& object : _application->getRootObjects()) {
             auto treeNode{ this->buildObjectTree(object) };
 
-            treeNode->clickEvent.subscribe([this, obj = object] (auto& name) {
-                objectSelectedEvent.trigger(*obj);
+            treeNode->getClickEvent().subscribe([this, obj = object] (auto& name) {
+                _objectSelectedEvent.trigger(*obj);
             });
 
             window->getElements().add(std::move(treeNode));
         }
+    }
+
+    Core::Events::IEventSubscriber<Core::Object &> &ObjectListWindow::getObjectSelectedEvent() {
+        return _objectSelectedEvent;
     }
 } // UI

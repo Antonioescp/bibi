@@ -32,7 +32,7 @@ namespace Bibi::Core::UI {
 
         // Listening for object inspection from object list window
         auto objectListWindow{ui->getElementByTag<ObjectListWindow>(ElementTag::WindowObjectList)};
-        objectListWindow->objectSelectedEvent.subscribe([inspectorWindow = window.get()](Core::Object &object) {
+        objectListWindow->getObjectSelectedEvent().subscribe([inspectorWindow = window.get()](Core::Object &object) {
             inspectorWindow->getElements().clear();
             for (auto &component : object.getComponents()) {
                 inspectorWindow->getElements().add(component->serializeToElement());
