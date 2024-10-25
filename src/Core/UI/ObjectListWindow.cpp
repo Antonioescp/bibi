@@ -12,6 +12,7 @@
 #include "Core/UI/ElementTag.hpp"
 #include "Modules/Gui/Elements/MenuElement.hpp"
 #include "Modules/Gui/Elements/ButtonElement.hpp"
+#include "Components/NameComponent.hpp"
 
 namespace Bibi::Core::UI {
     ObjectListWindow::ObjectListWindow(Core::Application *application, const std::vector<Core::Object*>& objects) : Element(application) {
@@ -29,9 +30,12 @@ namespace Bibi::Core::UI {
         // Button to add a new object
         auto addButton = std::make_unique<ButtonElement>(_application, "Add object");
         addButton->clickEvent.subscribe([this, target = window.get()] {
-            auto object = std::make_unique<Core::Object>();
+            auto object = std::make_unique<Core::Object>(_application);
             object->setTag(std::format("Object{}", _application->getObjects().size() + 1));
-            _application->addObject(std::move(object));
+            auto nameComponent{ std::make_unique<Components::NameComponent>(*object)  };
+            object->getComponents().add(std::move(nameComponent));
+
+            _application->getObjects().add(std::move(object));
 
             // Rebuilding the tree
             target->removeElements<TreeNodeElement>();

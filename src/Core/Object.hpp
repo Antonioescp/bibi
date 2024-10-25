@@ -13,12 +13,15 @@
 
 namespace Bibi::Core {
 
+    class Application;
+
     /**
      * @brief Clase base para todos los objetos en el motor.
      * @note esta clase debe ser heredada por todas las clases que representen un objeto en el motor.
      */
     class Object : public virtual Core::Lifecycle::ILifecycleAware {
     public:
+        explicit Object(Application* application);
         ~Object() override = default;
 
         /**
@@ -97,7 +100,7 @@ namespace Bibi::Core {
          template<typename TComponent>
          TComponent* getComponent() {
             for (auto& component : _components) {
-                if (auto* c = dynamic_cast<TComponent*>(component)) {
+                if (auto* c = dynamic_cast<TComponent*>(component.get())) {
                     return c;
                 }
             }
@@ -105,7 +108,12 @@ namespace Bibi::Core {
             return {};
          }
 
+         [[nodiscard]] Application* getApplication();
+         void setApplication(Application* application);
+
     protected:
+        Application* _application{ nullptr };
+
         /**
          * @brief Etiqueta del objeto.
          */

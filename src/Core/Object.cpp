@@ -2,6 +2,7 @@
 // Created by packa on 18/10/2024.
 //
 
+#include "Application.hpp"
 #include "Object.hpp"
 
 namespace Bibi::Core {
@@ -40,18 +41,30 @@ namespace Bibi::Core {
     }
 
     void Object::setUp() {
-
+        _components.setUp();
     }
 
     void Object::update() {
-
+        _components.update();
     }
 
     void Object::tearDown() {
-
+        _components.tearDown();
     }
 
     Core::Lifecycle::DeferredCollection<Component> &Object::getComponents() {
         return _components;
+    }
+
+    Object::Object(Application *application) : _application(application) {
+
+    }
+
+    Application* Object::getApplication() {
+        return _application;
+    }
+
+    void Object::setApplication(Application *application) {
+        _application = application;
     }
 } // Core

@@ -24,7 +24,7 @@ public:
     void setWrapped(bool wrapped);
 
 private:
-    std::string _text;
+    std::string _text{};
     bool _isWrapped{true};
 };
 

@@ -61,6 +61,8 @@ add_executable(bibi main.cpp
         src/Modules/Logging/LoggerMixin.hpp
         src/Core/UI/InfoWindow.cpp
         src/Core/UI/InfoWindow.hpp
+        src/Components/NameComponent.cpp
+        src/Components/NameComponent.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

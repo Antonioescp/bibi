@@ -17,7 +17,10 @@ namespace Bibi::Modules::Gui {
 
     class Element : public virtual IElement {
     public:
-        ~Element() override = default;
+        /**
+         * Crea una instancia de Element.
+         */
+        Element() = default;
 
         /**
          * Crea una instancia de Element.
@@ -25,10 +28,7 @@ namespace Bibi::Modules::Gui {
          */
         explicit Element(Core::Application *application);
 
-        /**
-         * Crea una instancia de Element.
-         */
-        Element() = default;
+        ~Element() override = default;
 
         void setUp() override;
 

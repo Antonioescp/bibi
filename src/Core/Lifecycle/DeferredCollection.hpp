@@ -58,7 +58,7 @@ namespace Bibi::Core::Lifecycle {
          * @param item El elemento a agregar.
          * @note El objeto se añadirá en el siguiente ciclo de vida.
          */
-        virtual void add(std::unique_ptr<TItem> item) {
+        void add(std::unique_ptr<TItem> item) {
             _itemsToAdd.push_back(std::move(item));
         }
 
@@ -67,7 +67,7 @@ namespace Bibi::Core::Lifecycle {
          * @param item El elemento a eliminar.
          * @note El objeto se eliminará en el siguiente ciclo de vida.
          */
-        virtual void remove(TItem* item) {
+        void remove(TItem* item) {
             _itemsToRemove.push_back(item);
         }
 
@@ -87,12 +87,28 @@ namespace Bibi::Core::Lifecycle {
             return _items.end();
         }
 
+        [[nodiscard]] std::size_t size() const {
+            return _items.size();
+        }
+
         const std::vector<std::unique_ptr<TItem>>& getPendingToAdd() const {
             return _itemsToAdd;
         }
 
         const std::vector<TItem*>& getPendingToRemove() const {
             return _itemsToRemove;
+        }
+
+        void clear() {
+            for (auto& item : _items) {
+                this->remove(item.get());
+            }
+        }
+
+        void clearWithoutLifecycle() {
+            _items.clear();
+            _itemsToAdd.clear();
+            _itemsToRemove.clear();
         }
 
     protected:

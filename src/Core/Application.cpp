@@ -3,7 +3,6 @@
 //
 
 #include "Application.hpp"
-#include <ranges>
 
 namespace Bibi::Core {
     Application::Application(GLFWwindow *window) {
@@ -15,25 +14,16 @@ namespace Bibi::Core {
         this->tearDown();
     }
 
-    const std::vector<std::unique_ptr<Core::Object>> &Application::getObjects() const {
-        return _objects;
-    }
-
-    void Application::addObject(std::unique_ptr<Core::Object> object) {
-        _objects.push_back(std::move(object));
-    }
-
-    void Application::removeObject(const Core::Object *object) {
-        auto remover = std::remove_if(_objects.begin(), _objects.end(), [&object](auto &element) {
-            return element.get() == object;
-        });
-        _objects.erase(remover, _objects.end());
-    }
-
-    std::vector<Core::Object*> Application::getRootObjects() const {
+    std::vector<Core::Object*> Application::getRootObjects() {
         std::vector<Core::Object*> rootObjects{};
 
-        for (const auto& object : _objects) {
+        for (auto& object : _objects) {
+            if (object->getParent() == nullptr) {
+                rootObjects.push_back(object.get());
+            }
+        }
+
+        for (auto& object : _objects.getPendingToAdd()) {
             if (object->getParent() == nullptr) {
                 rootObjects.push_back(object.get());
             }
@@ -48,6 +38,7 @@ namespace Bibi::Core {
             glClear(GL_COLOR_BUFFER_BIT);
 
             _modules.update();
+            _objects.update();
 
             glfwSwapBuffers(_mainWindow);
         }
@@ -55,6 +46,7 @@ namespace Bibi::Core {
 
     void Application::tearDown() {
         _modules.tearDown();
+        _objects.tearDown();
         glfwTerminate();
     }
 
@@ -64,9 +56,14 @@ namespace Bibi::Core {
         }
 
         _modules.setUp();
+        _objects.setUp();
     }
 
     Lifecycle::DeferredCollection<Modules::IModule> &Application::getModules() {
         return _modules;
+    }
+
+    Lifecycle::DeferredCollection<Object> &Application::getObjects() {
+        return _objects;
     }
 } // Application

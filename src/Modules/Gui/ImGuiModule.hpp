@@ -8,6 +8,7 @@
 #include <string>
 #include <span>
 #include <spdlog/logger.h>
+#include "Modules/IModule.hpp"
 #include "Modules/Logging/Logger.hpp"
 #include "Modules/Gui/IElement.hpp"
 #include "Core/Lifecycle/DeferredCollection.hpp"
