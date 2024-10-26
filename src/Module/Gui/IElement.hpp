@@ -4,7 +4,8 @@
 
 #ifndef BIBI_IELEMENT_HPP
 #define BIBI_IELEMENT_HPP
-
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
 namespace Bibi::Module::Gui {
 
     class IElement {

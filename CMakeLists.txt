@@ -22,6 +22,8 @@ add_executable(bibi main.cpp
         src/Module/Gui/IElement.hpp
         src/Module/Gui/Elements/MenuBarElement.cpp
         src/Module/Gui/Elements/MenuBarElement.hpp
+        src/Module/Gui/Elements/FileExplorerElement.cpp
+        src/Module/Gui/Elements/FileExplorerElement.h
 )
 
 target_include_directories(bibi PRIVATE src)

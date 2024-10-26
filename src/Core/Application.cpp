@@ -44,6 +44,7 @@ namespace Bibi::Core {
 
             for (auto& module : _runnableModules) {
                 module->run(_mainWindow);
+
             }
 
             glfwSwapBuffers(_mainWindow);

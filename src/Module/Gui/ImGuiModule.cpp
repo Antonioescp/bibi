@@ -7,6 +7,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "IElement.hpp"
+#include "Elements/FileExplorerElement.h"
 #include "Module/Gui/Elements/MenuBarElement.hpp"
 
 using namespace Bibi::Module::Logging;
@@ -80,5 +81,8 @@ namespace Bibi::Module::Gui {
         _logger->info("Registering menu bar element");
         auto menuBar = std::make_unique<MenuBarElement>();
         this->addElement(std::move(menuBar));
+
+        auto fileExplorer{std::make_unique<FileExplorerElement>("data")};
+        this->addElement(std::move(fileExplorer));
     }
 } // Module
