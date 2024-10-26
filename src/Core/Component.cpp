@@ -10,11 +10,15 @@ namespace Bibi::Core {
 
     }
 
-    std::string Component::getTag() const {
-        return _tag;
+    std::string Component::getName() const {
+        return _name;
     }
 
-    void Component::setTag(std::string tag) {
-        _tag = std::move(tag);
+    void Component::setName(std::string name) {
+        _name = std::move(name);
+    }
+
+    Object &Component::getObject() const {
+        return _object;
     }
 } // Core

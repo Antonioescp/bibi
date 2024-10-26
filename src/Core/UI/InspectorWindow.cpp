@@ -10,9 +10,10 @@
 #include "Modules/Gui/ImGuiModule.hpp"
 #include "ElementTag.hpp"
 #include "ObjectListWindow.hpp"
-#include "Modules/Logging/Logger.hpp"
 #include "Modules/Gui/Elements/TextElement.hpp"
-#include "Components/NameComponent.hpp"
+#include "Modules/Gui/Elements/ComponentElement.hpp"
+#include "Modules/Gui/Elements/LabelElement.hpp"
+#include "Modules/Gui/Elements/SeparatorElement.hpp"
 
 namespace Bibi::Core::UI {
 
@@ -32,12 +33,25 @@ namespace Bibi::Core::UI {
 
         // Listening for object inspection from object list window
         auto objectListWindow{ui->getElementByTag<ObjectListWindow>(ElementTag::WindowObjectList)};
-        objectListWindow->getObjectSelectedEvent().subscribe([inspectorWindow = window.get()](Core::Object &object) {
-            inspectorWindow->getElements().clear();
-            for (auto &component : object.getComponents()) {
-                inspectorWindow->getElements().add(component->serializeToElement());
-            }
-        });
+        objectListWindow->getObjectSelectedEvent().subscribe(
+                [this, inspectorWindow = window.get()](Core::Object &object) {
+
+                    auto& elements{inspectorWindow->getElements()};
+                    elements.clear();
+
+                    auto nameElement{std::make_unique<LabelElement>("Nombre:", object.getTag())};
+                    elements.add(std::move(nameElement));
+                    auto nameSeparator{std::make_unique<Modules::Gui::SeparatorElement>()};
+                    elements.add(std::move(nameSeparator));
+
+                    for (auto &component: object.getComponents()) {
+                        auto componentElement{ std::make_unique<Modules::Gui::ComponentElement>(*component) };
+                        elements.add(std::move(componentElement));
+
+                        auto separator{std::make_unique<Modules::Gui::SeparatorElement>()};
+                        elements.add(std::move(separator));
+                    }
+                });
 
         // Adding the window
         this->getElements().add(std::move(window));

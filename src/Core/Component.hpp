@@ -25,13 +25,15 @@ namespace Bibi::Core {
         void update() override {}
         void tearDown() override {}
 
-        [[nodiscard]] std::string getTag() const;
-        void setTag(std::string tag);
+        [[nodiscard]] std::string getName() const;
+        void setName(std::string name);
+
+        [[nodiscard]] Object &getObject() const;
 
         virtual std::unique_ptr<Modules::Gui::IElement> serializeToElement() = 0;
     protected:
         Object &_object;
-        std::string _tag;
+        std::string _name;
     };
 
 } // Core
