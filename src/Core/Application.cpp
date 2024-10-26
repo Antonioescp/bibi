@@ -37,8 +37,8 @@ namespace Bibi::Core {
             glfwPollEvents();
             glClear(GL_COLOR_BUFFER_BIT);
 
-            _modules.update();
             _objects.update();
+            _modules.update();
 
             glfwSwapBuffers(_mainWindow);
         }

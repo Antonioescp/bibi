@@ -73,6 +73,11 @@ add_executable(bibi main.cpp
         src/Modules/Gui/Elements/SeparatorElement.hpp
         src/Rendering/Mesh.cpp
         src/Rendering/Mesh.hpp
+        src/Rendering/Shader.cpp
+        src/Rendering/Shader.hpp
+        src/Core/Enum.hpp
+        src/Rendering/ShaderEnum.hpp
+        src/Rendering/ShaderEnum.cpp
 )
 
 target_include_directories(bibi PRIVATE src)
@@ -89,12 +94,8 @@ target_link_libraries(bibi PRIVATE imgui::imgui)
 find_package(spdlog CONFIG REQUIRED)
 target_link_libraries(bibi PRIVATE spdlog::spdlog)
 
-# Define the source directory and the destination directory (bin dir)
-set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/data")
-set(DEST_DIR "${CMAKE_BINARY_DIR}")
-
-# Copy the directory from source to bin
-file(COPY ${SOURCE_DIR} DESTINATION ${DEST_DIR})
+# Copying files to build directory
+file(COPY ${CMAKE_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-DDEBUG_BUILD)
