@@ -8,7 +8,7 @@
 
 namespace Bibi::Components {
     void NameComponent::setUp() {
-        _tag = "NameComponent";
+        _name = "NameComponent";
     }
 
     std::unique_ptr<Modules::Gui::IElement> NameComponent::serializeToElement() {

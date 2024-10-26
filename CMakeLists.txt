@@ -63,6 +63,16 @@ add_executable(bibi main.cpp
         src/Core/UI/InfoWindow.hpp
         src/Components/NameComponent.cpp
         src/Components/NameComponent.hpp
+        src/Components/RenderComponent.cpp
+        src/Components/RenderComponent.hpp
+        src/Modules/Gui/Elements/ComponentElement.cpp
+        src/Modules/Gui/Elements/ComponentElement.hpp
+        src/Modules/Gui/Elements/LabelElement.cpp
+        src/Modules/Gui/Elements/LabelElement.hpp
+        src/Modules/Gui/Elements/SeparatorElement.cpp
+        src/Modules/Gui/Elements/SeparatorElement.hpp
+        src/Rendering/Mesh.cpp
+        src/Rendering/Mesh.hpp
 )
 
 target_include_directories(bibi PRIVATE src)

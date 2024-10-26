@@ -13,6 +13,7 @@
 #include "Modules/Gui/Elements/MenuElement.hpp"
 #include "Modules/Gui/Elements/ButtonElement.hpp"
 #include "Components/NameComponent.hpp"
+#include "Components/RenderComponent.hpp"
 
 namespace Bibi::Core::UI {
     ObjectListWindow::ObjectListWindow(Core::Application *application, const std::vector<Core::Object*>& objects) : Element(application) {
@@ -32,7 +33,7 @@ namespace Bibi::Core::UI {
         addButton->clickEvent.subscribe([this, target = window.get()] {
             auto object = std::make_unique<Core::Object>(_application);
             object->setTag(std::format("Object{}", _application->getObjects().size() + 1));
-            auto nameComponent{ std::make_unique<Components::NameComponent>(*object)  };
+            auto nameComponent{ std::make_unique<Components::RenderComponent>(*object)  };
             object->getComponents().add(std::move(nameComponent));
 
             _application->getObjects().add(std::move(object));

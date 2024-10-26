@@ -16,8 +16,7 @@ namespace Bibi::Modules::Logging {
         virtual ~LoggerMixin() = default;
 
     protected:
-        LoggerMixin() = default;
-        std::shared_ptr<spdlog::logger> _logger{ Logger::get(T::getLoggerName()) };
+        std::shared_ptr<spdlog::logger> _logger{ Logger::get(dynamic_cast<T*>(this)->getLoggerName()) };
     };
 
 } // Logging
