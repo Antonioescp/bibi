@@ -9,21 +9,62 @@ add_executable(bibi main.cpp
         src/Core/IApplicationBuilder.hpp
         src/Core/OpenGLApplicationBuilder.cpp
         src/Core/OpenGLApplicationBuilder.hpp
-        src/Module/IModuleConfigurable.hpp
-        src/Module/IModule.hpp
-        src/Module/Gui/ImGuiModule.cpp
-        src/Module/Gui/ImGuiModule.hpp
-        src/Module/Logging/LoggerModule.cpp
-        src/Module/Logging/LoggerModule.hpp
-        src/Module/Logging/Logger.cpp
-        src/Module/Logging/Logger.hpp
-        src/Module/IModuleDeconstructable.hpp
-        src/Module/IModuleRunnable.hpp
-        src/Module/Gui/IElement.hpp
-        src/Module/Gui/Elements/MenuBarElement.cpp
-        src/Module/Gui/Elements/MenuBarElement.hpp
-        src/Module/Gui/Elements/FileExplorerElement.cpp
-        src/Module/Gui/Elements/FileExplorerElement.h
+        src/Modules/IModule.hpp
+        src/Modules/Gui/ImGuiModule.cpp
+        src/Modules/Gui/ImGuiModule.hpp
+        src/Modules/Logging/LoggerModule.cpp
+        src/Modules/Logging/LoggerModule.hpp
+        src/Modules/Logging/Logger.cpp
+        src/Modules/Logging/Logger.hpp
+        src/Modules/Gui/IElement.hpp
+        src/Modules/Gui/Elements/MainMenuBarElement.cpp
+        src/Modules/Gui/Elements/MainMenuBarElement.hpp
+        src/Core/Events/Event.hpp
+        src/Core/Events/IEventSubscriber.hpp
+        src/Core/Events/IEventPublisher.hpp
+        src/Core/Events/IEvent.hpp
+        src/Core/Exceptions/Exception.cpp
+        src/Core/Exceptions/Exception.hpp
+        src/Core/Events/Function.hpp
+        src/Modules/Gui/Element.cpp
+        src/Modules/Gui/Element.hpp
+        src/Modules/Gui/Elements/MenuElement.cpp
+        src/Modules/Gui/Elements/MenuElement.hpp
+        src/Modules/Gui/Elements/MenuItemElement.cpp
+        src/Modules/Gui/Elements/MenuItemElement.hpp
+        src/Modules/Gui/Elements/WindowElement.cpp
+        src/Modules/Gui/Elements/WindowElement.hpp
+        src/Core/UI/BibiMainMenuElement.cpp
+        src/Core/UI/BibiMainMenuElement.hpp
+        src/Core/UI/ElementTag.cpp
+        src/Core/UI/ElementTag.hpp
+        src/Core/UI/BibiAboutWindowElement.cpp
+        src/Core/UI/BibiAboutWindowElement.hpp
+        src/Modules/Gui/Elements/TextElement.cpp
+        src/Modules/Gui/Elements/TextElement.hpp
+        src/Core/UI/ObjectListWindow.cpp
+        src/Core/UI/ObjectListWindow.hpp
+        src/Core/Object.cpp
+        src/Core/Object.hpp
+        src/Modules/Gui/Elements/TreeNodeElement.cpp
+        src/Modules/Gui/Elements/TreeNodeElement.hpp
+        src/Modules/Gui/Elements/ButtonElement.cpp
+        src/Modules/Gui/Elements/ButtonElement.hpp
+        src/Core/UI/InspectorWindow.cpp
+        src/Core/UI/InspectorWindow.hpp
+        src/Core/Component.cpp
+        src/Core/Component.hpp
+        src/Core/Lifecycle/ILifecycleAware.hpp
+        src/Core/Lifecycle/DeferredCollection.hpp
+        src/Core/Concepts/Pointer.hpp
+        src/Core/Concepts/Lifecycle.hpp
+        src/Modules/Logging/LoggerMixin.hpp
+        src/Core/UI/InfoWindow.cpp
+        src/Core/UI/InfoWindow.hpp
+        src/Components/NameComponent.cpp
+        src/Components/NameComponent.hpp
+        src/Core/UI/FileExplorerElement.cpp
+        src/Core/UI/FileExplorerElement.h
 )
 
 target_include_directories(bibi PRIVATE src)
@@ -46,3 +87,7 @@ set(DEST_DIR "${CMAKE_BINARY_DIR}")
 
 # Copy the directory from source to bin
 file(COPY ${SOURCE_DIR} DESTINATION ${DEST_DIR})
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DDEBUG_BUILD)
+endif()

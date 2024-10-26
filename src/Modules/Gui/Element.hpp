@@ -1,0 +1,96 @@
+//
+// Created by packa on 11/10/2024.
+//
+
+#ifndef BIBI_ELEMENT_HPP
+#define BIBI_ELEMENT_HPP
+
+#include <vector>
+#include <memory>
+#include <ranges>
+
+#include "IElement.hpp"
+#include "Core/Application.hpp"
+#include "Core/Lifecycle/DeferredCollection.hpp"
+
+namespace Bibi::Modules::Gui {
+
+    class Element : public virtual IElement {
+    public:
+        /**
+         * Crea una instancia de Element.
+         */
+        Element() = default;
+
+        /**
+         * Crea una instancia de Element.
+         * @param application La aplicación a la que pertenece el elemento.
+         */
+        explicit Element(Core::Application *application);
+
+        ~Element() override = default;
+
+        void setUp() override;
+
+        void update() override;
+
+        void tearDown() override;
+
+        /**
+         * Elimina todos los elementos hijos de este elemento que sean del tipo especificado.
+         * @tparam TElement El tipo de elemento a eliminar.
+         * @note Los elementos se eliminan de manera diferida, es decir, se eliminan al inicio del siguiente ciclo de actualización.
+         */
+        template <typename TElement>
+        requires std::derived_from<TElement, IElement>
+        void removeElements() {
+            for (auto &element : _elements) {
+                if (dynamic_cast<TElement*>(element.get())) {
+                    _elements.remove(element.get());
+                }
+            }
+        }
+
+        void setTag(std::string tag) override;
+
+        std::string getTag() override;
+
+        void setParent(IElement *parent) override;
+
+        IElement *getParent() override;
+
+        Core::Application *getApplication() override;
+
+        void setApplication(Core::Application *application) override;
+
+        IElement *getChildByTag(std::string_view tag) override;
+
+        Core::Lifecycle::DeferredCollection<IElement>& getElements() {
+            return _elements;
+        }
+
+    protected:
+        /**
+         * Aplicacion a la que pertenece el elemento.
+         */
+        Core::Application *_application{nullptr};
+
+        /**
+         * Etiqueta del elemento.=
+         */
+        std::string _tag{};
+
+        /**
+         * Padre de este elemento.
+         */
+        IElement *_parent{nullptr};
+
+        /**
+         * Colección de elementos hijos.
+         */
+         Core::Lifecycle::DeferredCollection<IElement> _elements{};
+    };
+
+} // Gui
+
+#endif //BIBI_ELEMENT_HPP

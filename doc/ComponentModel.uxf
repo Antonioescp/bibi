@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>710</y>
+      <w>480</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Serializer&lt;TValue&gt;
+--
++ Serializer(TValue* value)
+--
++ const std::string&amp; getValue() const;
++ void setValue(const std::string&amp; value);
+--
+- TValue* value;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>390</y>
+      <w>260</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Component
+--
++ Component(Object&amp; object)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>310</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/ILifecycleAware/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>330</y>
+      <w>90</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;inherits&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>390</y>
+      <w>500</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Object
+--
++ TComponent* getComponent&lt;TComponent&gt;()
++ DereferredCollection&lt;Component&gt;&amp; getComponents()
+--
+- DereferredCollection&lt;Component&gt; _components
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
+      <y>390</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+</diagram>
